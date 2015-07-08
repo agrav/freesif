@@ -1,0 +1,5 @@
+*.py[cod]
+freesif.egg-info/
+examples/
+test_files/
+tests/
