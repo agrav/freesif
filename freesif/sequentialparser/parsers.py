@@ -476,6 +476,7 @@ def parse_file(in_file, out_file, only=None):
             if attoplevel:
                 if hierarch_table[0]['islevl'] == 1:
                     level = 'FIRSTLEVEL'
+                    group._f_setattr('INDEX', current_indsel)
                 else:
                     level = 'TOPLEVEL'
 

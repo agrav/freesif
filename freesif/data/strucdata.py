@@ -267,7 +267,7 @@ class FirstLevelData(StrucData):
     # extrapolation matrices for 2nd order elements
     s3 = np.sqrt(3)
 
-    # extrapolation matrix 8-node quads
+    # 8-node quads
     xquad = np.array(
         [[(1+s3)*(1+s3), (1-s3)*(1+s3), (1+s3)*(1-s3), (1-s3)*(1-s3)],
          [(1+s3),        (1+s3),        (1-s3),        (1-s3)       ],
@@ -278,7 +278,7 @@ class FirstLevelData(StrucData):
          [(1+s3)*(1-s3), (1-s3)*(1-s3), (1+s3)*(1+s3), (1-s3)*(1+s3)],
          [(1+s3),        (1-s3),        (1+s3),        (1-s3)       ]]) * .25
 
-    # extrapolation matrix 6-node triangles
+    # 6-node triangles
     xtri = np.array([[ 5./3, -1./3, -1./3],
                      [ 2./3,  2./3, -1./3],
                      [-1./3,  5./3, -1./3],
@@ -286,12 +286,15 @@ class FirstLevelData(StrucData):
                      [-1./3, -1./3,  5./3],
                      [ 2./3, -1./3,  2./3]])
 
-    # extrapolation matrix 3-node beam
+    # 3-node beam
     xbm3 = np.array([[1. + s3, 1. - s3],
                      [1.     , 1.     ],
                      [1. - s3, 1. + s3]]) * .5
 
-
+    # index arrays for 1st order shells
+    # (indices of result points located at nodes)
+    idxtri = np.array([0, 4, 1, 5, 3, 7])
+    idxquad = np.array([0, 5, 1, 6, 4, 9, 3, 8])
 
     def __init__(self, tbgroup, toplevel=None):
         super(FirstLevelData, self).__init__(tbgroup, toplevel)
@@ -312,23 +315,30 @@ class FirstLevelData(StrucData):
         return self._process_eltyp[eltyp](restype, pos, d)
 
     def _process_eltyp15(self, restype, pos, d):
-        pass
+        """BEAS, 3D Beam (2-node)"""
+        return d.reshape(2, 6)
 
     def _process_eltyp23(self, restype, pos, d):
-        pass
+        """BTSS, General Curved Beam (3-node)"""
+        d.shape = (2, 6)
+        return np.dot(self.xbm3, d)
 
     def _process_eltyp24(self, restype, pos, d):
-        pass
+        """FQUS, Flat Quadrilateral Thin Shell (4-node)"""
+        return d.reshape(10, 3)[self.idxquad,:].reshape(4, 2, 3)
 
     def _process_eltyp25(self, restype, pos, d):
-        pass
+        """FTRS, Flat Triangular Thin Shell (3-node)"""
+        return d.reshape(8, 3)[self.idxtri,:].reshape(3, 2, 3)
 
     def _process_eltyp26(self, restype, pos, d):
+        """SCTS, Subparametric Curved Triangular Thick Shell (6-node)"""
         d.shape = (2, 3, 5)
         d = self._extrapolate_to_surface(d)
-        return np.dot(self.xtri, d)
+        return np.dot(self.xtri, d)  # shape is (6, 2, 5)
 
     def _process_eltyp28(self, restype, pos, d):
+        """SCQS, Subparametric Curved Quadrilateral Thick Shell (8-node)"""
         d.shape = (2, 4, 5)  # (side, respt, comp)
         d = self._extrapolate_to_surface(d)
         # extrapolate to nodes:
@@ -429,13 +439,6 @@ class FirstLevelData(StrucData):
             col = 'nodeno'
         else:
              raise ValueError("numbertype must be 'internal' or 'external'")
-#        if sets:
-#            elemindices = self._get_elementindices(sets, kind)
-#            nodeindices = self._get_nodeindices_ofelems(
-#                elemindices, disconnected)
-#            return gnode[nodeindices][column]
-#        else:
-#            return gnode[:][column]
         if any((sets, kind, disconnected)):
             nodeindices = self._get_nodeindices(sets, kind, disconnected)
             return gnode.col(col).take(nodeindices)
@@ -496,10 +499,12 @@ class FirstLevelData(StrucData):
             data.dtype = np.complex64
 
         # reshape
-        ncomps = 6  # for now assume allways 6 comps..
+        ncomps = 6  # for now assume allways 6 comps for node results..
         nres = len(ires)  # TODO: need an axis for rescase!
-
-        data.shape = (-1, ncomps)
+        if nres > 1:
+            data.shape = (nres, -1, ncomps)
+        else:
+            data.shape = (-1, ncomps)
 
         # disconnect
         if disconnected:
@@ -540,22 +545,13 @@ class FirstLevelData(StrucData):
         #   displacement
         #   velocity
         #   acceleration
+        #   reactions ?
         #   nodal average of element results (coplanar elements only)
-
-        # allow for disconnected ?
-
-        # should be flexible and allow various patterns for rescases !
-        # use slice?
 
         # rescase patterns:
         #   None (default) returns all
         #   rescase (int): choose a single resultcase
         #   sequence of rescases (ints): (1,4,5,6)
-
-        # what if rescases are combination of real and complex?
-        # return all data as complex64? and issue a warning?
-        # Better to just raise an exception, one will probably never want to
-        # operate on real and complex results at the same time..
 
     def get_elements(self, sets=None, disconnected=False, kind=None):
         """Get element connectivity.
@@ -626,7 +622,7 @@ class FirstLevelData(StrucData):
         restype : str
             ...
         pos : str
-            ...
+            nodes (default), gauss or average
         run : int
             ...
         rescases : int, sequence or None
@@ -643,7 +639,7 @@ class FirstLevelData(StrucData):
             rvres, res = self._get_record('rvforces')
             start, stop = 'force_start', 'force_stop'
             kind = 'beam'
-        if restype in ('generalstress', 'decomposedstress'):
+        elif restype in ('generalstress', 'decomposedstress'):
             rvres, res = self._get_record('rvstress')
             start, stop = 'stress_start', 'stress_stop'
             kind = 'shell'
@@ -672,14 +668,20 @@ class FirstLevelData(StrucData):
                 data.append(
                     self._process_element_results(eltyp, restype, pos, d))
 
-        data = np.concatenate(data)  # shape is (nres*npos, surface, comp)
+        data = np.concatenate(data)  # shape is (nres*npos, comp)
+                                     # or (nres*npos, surface, comp)
 
         # reshape
         if len(ires) > 1:
-            ncomps = data.shape[2]
-            data.shape = (len(ires), -1, 2, ncomps)
+            if restype in ('generalstress', 'decomposedstress'):
+                ncomps = data.shape[2]
+                data.shape = (len(ires), -1, 2, ncomps)
+            else:
+                ncomps = data.shape[1]
+                data.shape = (len(ires), -1, ncomps)
 
-        # decomposing can be done here
+
+        # decompose
         # if restype = 'decomposedstress':
         #     ...
 

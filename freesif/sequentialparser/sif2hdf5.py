@@ -292,6 +292,7 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
                 print 'file not found: ' + fname
 
     if in_memory:
+        # TODO: is it possible to change mode to 'r' here ?
         return out_file
 
     out_file.close()
