@@ -316,7 +316,9 @@ class FirstLevelData(StrucData):
 
     def _process_eltyp15(self, restype, pos, d):
         """BEAS, 3D Beam (2-node)"""
-        return d.reshape(2, 6)
+        # it seems this element has 3 result points.
+        # return first and last...
+        return d.reshape(3, 6)[[0,2],:]
 
     def _process_eltyp23(self, restype, pos, d):
         """BTSS, General Curved Beam (3-node)"""
@@ -363,10 +365,10 @@ class FirstLevelData(StrucData):
         sets : str or sequence of str
             set name or sequence of set names. If sets=None (default), all
             nodes in the superelement is returned.
-        disconnected : bool
-            ...
         kind : str
-            ...
+            'beam', 'shell' or None (None is default, returns all kinds)
+        disconnected : bool
+            if True,
         trans : numpy.ndarray, int or 'top'
             | four calling patterns are supported:
             | 1: provide a 4x4 transformation matrix
@@ -376,8 +378,6 @@ class FirstLevelData(StrucData):
         index : int
             superelement index number. Relevant when applying hierarchy
             transformations (T-files only). Default is 1.
-        concepts : bool
-            ...
 
         Returns
         -------
@@ -564,7 +564,7 @@ class FirstLevelData(StrucData):
         disconnected: bool
             ...
         kind : str
-            'beam', 'shell' or None (default, returns all kinds)
+            'beam', 'shell' or None (None is default, returns all kinds)
 
         Returns
         -------

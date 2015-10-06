@@ -16,7 +16,10 @@ sesam2vtk_connectivity = {23 : np.array([0,2,1]),
 sesam2vtk_elemresults = {26 : np.array([0,2,4,1,3,5])}
 
 # get vtk element type id
-sesam2vtk_elementtypeid = {23 : 21,
+sesam2vtk_elementtypeid = {15 : 3,
+                           23 : 21,
+                           24 : 9,
+                           25 : 5,
                            26 : 22,
                            28 : 23}
 
