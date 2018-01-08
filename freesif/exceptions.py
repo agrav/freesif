@@ -22,3 +22,7 @@ class ResultError(Exception):
 
 class ClosedFileError(Exception):
     pass
+
+
+class VtfError(Exception):
+    pass

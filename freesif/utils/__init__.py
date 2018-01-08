@@ -2,6 +2,7 @@
 # Copyright (c) 2015 Audun Gravdal Johansen
 """
 """
-from .writers import vtuwriter
+from .writers import VtuWriter
+from .vtfdata import VtfData
 
-__all__ = ['vtuwriter']
+__all__ = ['VtuWriter', 'VtfData']

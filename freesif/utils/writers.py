@@ -58,7 +58,7 @@ def _reorder_cellpointdata_vtk(resultarr, offsets, types):
     _reorder_data(resultarr, offsets, types, sesam2vtk_elemresults)
 
 
-class vtuwriter(object):
+class VtuWriter(object):
     """write data to vtk xml format (UnstructuredGrid)
 
     Examples

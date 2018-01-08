@@ -368,7 +368,9 @@ class FirstLevelData(StrucData):
         kind : str
             'beam', 'shell' or None (None is default, returns all kinds)
         disconnected : bool
-            if True,
+            if True, elements do not share nodes. Instead each element has its
+            own set of nodes. This results in more nodes than in the original
+            data.
         trans : numpy.ndarray, int or 'top'
             | four calling patterns are supported:
             | 1: provide a 4x4 transformation matrix
@@ -460,11 +462,18 @@ class FirstLevelData(StrucData):
         sets : str or sequence of str
             set name or sequence of set names. If sets=None (default), all
             elements in the current dataset is returned.
+        kind : str
+            'beam', 'shell' or None (None is default, returns all kinds)
+        disconnected : bool
+            if True, elements do not share nodes. Instead each element has its
+            own set of nodes. This results in more nodes than in the original
+            data.
 
         Returns
         -------
-        ...
-            ...
+        result : numpy.ndarray
+            A 3d array with shape (nrescases, nnodes, 6), where the last axis
+            represent the six degrees of freedom for the result type.
         """
 
         if restype == 'displacement':
@@ -561,15 +570,43 @@ class FirstLevelData(StrucData):
         sets : str or sequence of str
             set name or sequence of set names. If sets=None (default), all
             elements in the current dataset is returned.
-        disconnected: bool
-            ...
+        disconnected : bool
+            if True, elements do not share nodes. Instead each element has its
+            own set of nodes. This results in more nodes than in the original
+            data.
         kind : str
             'beam', 'shell' or None (None is default, returns all kinds)
 
         Returns
         -------
-        connectivity, offset, eltyp : numpy.ndarrays
-            ...
+        Returns three 1d arrays:
+
+        connectivity : numpy.ndarray
+            Element definitions are given sequentially as indices into a
+            corresponding *coords* array, ref *get_nodes* method. the
+            *get_nodes* method must have been called with the same values for
+            *sets*, *disconnected*, and *kind*.
+        offset : numpy.ndarray
+            indices into *connectivity* representing the end of an element
+            definition. This array has length equal to the number of elements
+            returned.
+        eltyp : numpy.ndarray
+            element type id. corresponds to the *offset* array. See table below
+            for the supported element types.
+
+        Supported element types
+        -----------------------
+        ==== ====== ============ ==============================================
+        Name   Id   No. of nodes Description
+        ==== ====== ============ ==============================================
+        BEAS  15         2       3D 2 Node Beam
+        BTSS  23         3       General Curved Beam
+        FQUS  24         4       Flat Quadrilateral Thin Shell
+        FTRS  25         3       Flat Triangular Thin Shell
+        SCTS  26         6       Subparametric Curved Triangular Thick Shell
+        SCQS  28         8       Subparametric Curved Quadrilateral Thick Shell
+        ==== ====== ============ ==============================================
+
         """
 
         # TODO: should disconnected be True as default? If this turns out to be
@@ -620,11 +657,11 @@ class FirstLevelData(StrucData):
         Parameters
         ----------
         restype : str
-            ...
+            'beamforce', 'generalstress' or 'decomposed stress'
         pos : str
-            nodes (default), gauss or average
+            'nodes' (default), 'gauss' or 'average'
         run : int
-            ...
+            Analysis run number (default is 1)
         rescases : int, sequence or None
             External result case number(s)
         sets : str or sequence of str
@@ -632,9 +669,41 @@ class FirstLevelData(StrucData):
 
         Returns
         -------
+        result : numpy.ndarray
+            The shape of the returned array will depend on the provided values
+            for the *restype* and *pos* parameters. See below for description
+            of the different types.
+
+        Result type: Beam Force
+        ---------------------------
         ...
-            ...
+
+        ===== ===== ========== ==========================================
+        Pos.  Elem.  No. of    No. of comps.
+              Type   Res. pts.
+        ===== ===== ========== ==========================================
+        nodes BEAS  2          6 (nxx, nxy, nxz, mxx, mxy, mxz)
+        nodes BTSS  3          6 (nxx, nxy, nxz, mxx, mxy, mxz)
+        ===== ===== ========== ==========================================
+
+
+
+        Result type: General Stress
+        ---------------------------
+        ...
+
+        ===== ===== ========== ==========================================
+        Pos.  Elem.  No. of    No. of comps.
+              Type   Res. pts.
+        ===== ===== ========== ==========================================
+        nodes FQUS   4            3 (sigxx, sigyy, tauxy)
+        nodes FTRS   3            3 (sigxx, sigyy, tauxy)
+        nodes SCTS   6            5 (sigxx, sigyy, tauxy, tauxz, tauyz)
+        nodes SCQS   8            5 (sigxx, sigyy, tauxy, tauxz, tauyz)
+        ===== ===== ========== ==========================================
+
         """
+
         if restype == 'beamforce':
             rvres, res = self._get_record('rvforces')
             start, stop = 'force_start', 'force_stop'
