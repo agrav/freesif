@@ -26,3 +26,7 @@ class ClosedFileError(Exception):
 
 class VtfError(Exception):
     pass
+
+
+class VtkError(Exception):
+    pass

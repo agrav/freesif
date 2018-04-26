@@ -7,6 +7,8 @@ import numpy as np
 from struct import pack
 from base64 import b64encode
 from itertools import izip
+from ..exceptions import VtkError
+
 
 # index arrays to reorder element connectivity - keys are SESAM element id's
 sesam2vtk_connectivity = {23 : np.array([0,2,1]),
@@ -141,19 +143,19 @@ class VtuWriter(object):
     def start_celldata(self):
         self._open_data('CellData')
 
-    def add_data(self, arr, name):
+    def add_data(self, arr, name, compnames=None):
         """
         """
         if not self._pointdata_open and not self._celldata_open:
-            raise Exception('Call start_pointdata() or start_celldata() first')
-        self._write_array(arr, name)
+            raise VtkError('Call start_pointdata() or start_celldata() first')
+        self._write_array(arr, name, compnames)
 
-    def add_data_cellpoints(self, arr, name):
+    def add_data_cellpoints(self, arr, name, compnames=None):
         """
         """
         _reorder_cellpointdata_vtk(
             arr, self._current_offsets, self._current_types)
-        self.add_data(arr, name)
+        self.add_data(arr, name, compnames)
 
 
     def close(self):
@@ -163,7 +165,7 @@ class VtuWriter(object):
         self._close_element('VTKFile')
         self._file.close()
 
-    def _write_array(self, arr, name):
+    def _write_array(self, arr, name, compnames=None):
 
         # accept 1d or 2d array
         if arr.ndim == 2:
@@ -171,11 +173,19 @@ class VtuWriter(object):
         elif arr.ndim == 1:
             ncomps = 1
         else:
-            raise Exception('array must be 1d or 2d')
+            raise VtkError('array must be 1d or 2d')
+
+        # create comp name kwargs
+        if compnames:  # sequence of str
+            compname_dict = {'ComponentName{}'.format(i): cn \
+                             for i, cn in enumerate(compnames)}
+        else:
+            compname_dict = {}
 
         vtktype = numpy2vtk_datatype[arr.dtype.name]
         self._open_element('DataArray', type=vtktype, Name=name,
-                           NumberOfComponents=ncomps, format='binary')
+                           NumberOfComponents=ncomps, format='binary',
+                           **compname_dict)
 
         # write indent
         self._file.write('  '*len(self._elements))
@@ -203,7 +213,7 @@ class VtuWriter(object):
 
     def _open_data(self, datatype):
         if not self._piece_open:
-            raise Exception('Call new_piece() first')
+            raise VtkError('Call new_piece() first')
         self._close_data()
         self._open_element(datatype)
         if datatype == 'PointData':
@@ -234,7 +244,7 @@ class VtuWriter(object):
 
     def _close_element(self, tag):
         if not tag == self._elements.pop():
-            raise Exception('{} has no corresponding opening tag'.format(tag))
+            raise VtkError('{} has no corresponding opening tag'.format(tag))
         s = '  '*len(self._elements)
         s += '</{}>\n'.format(tag)
         self._file.write(s)

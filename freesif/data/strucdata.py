@@ -562,7 +562,7 @@ class FirstLevelData(StrucData):
         #   rescase (int): choose a single resultcase
         #   sequence of rescases (ints): (1,4,5,6)
 
-    def get_elements(self, sets=None, disconnected=False, kind=None):
+    def get_elements(self, sets=None, kind=None, disconnected=False):
         """Get element connectivity.
 
         Parameters
@@ -657,7 +657,7 @@ class FirstLevelData(StrucData):
         Parameters
         ----------
         restype : str
-            'beamforce', 'generalstress' or 'decomposed stress'
+            'beamforce', 'generalstress' or 'decomposedstress'
         pos : str
             'nodes' (default), 'gauss' or 'average'
         run : int
@@ -755,6 +755,12 @@ class FirstLevelData(StrucData):
         #     ...
 
         return data
+
+        # this function could also support 'kind':
+        # The purpose would be (for kind='all') to have same shape datasets
+        # for both beam and shell results which then could be used with a single
+        # dataset for nodes and elements. irrelevant element types would be
+        # given zero or nan values.
 
         #   - get internal rescase number(s) from external and run no.
         #     e.g. self._get_ires(run, rescases)
