@@ -1,0 +1,1135 @@
+1
+ 
+ 
+ 
+ 
+ 
+                                 ******       ******       ******       ******      ** ***  ****
+                                ********     ********     ********     ********     *************
+                               **      **   **      **   **      **   **      **    **    **    **
+                               **           **      **   **                   **    **    **    **
+                                *******     **********    *******      *********    **    **    **
+                                 *******    *********      *******    **********    **    **    **
+                                       **   **                   **   **      **    **    **    **
+                               **      **   **      **   **      **   **      **    **    **    **
+                                ********     ********     ********     *********    **    **    **
+                                 ******       ******       ******       ****** **   **    **    **
+ 
+ 
+ 
+                               *******************************************************************
+                               *******************************************************************
+                               **                                                               **
+                               **                                                               **
+                               **      *****   *******   *****   *******  ******    *****       **
+                               **     *     *  *        *     *     *     *     *  *     *      **
+                               **     *        *        *           *     *     *  *     *      **
+                               **      *****   *****     *****      *     ******   *******      **
+                               **           *  *              *     *     *   *    *     *      **
+                               **     *     *  *        *     *     *     *    *   *     *      **
+                               **      *****   *******   *****      *     *     *  *     *      **
+                               **                                                               **
+                               **                                                               **
+                               **               Superelement Structural Analysis                **
+                               **                                                               **
+                               **                                                               **
+                               *******************************************************************
+                               *******************************************************************
+ 
+ 
+                                              Marketing and Support by DNV GL - Software
+ 
+ 
+ 
+               Program id   : 8.8-02                                           Computer         : 8664
+               Release date : 26-NOV-2014                                      Impl. update     :
+               Access time  : 27-APR-2018 14:21:05                             Operating system : Win NT 6.1 [7601]
+               User id      : agh                                              CPU id           : 0492791872
+                                                                               Installation     : , INOCEAN70
+ 
+ 
+               Copyright DNV GL AS, P.O.Box 300, N-1322 Hovik, Norway
+ 
+ 
+
+
+
+ ***** SESAM INTERNAL TIME IS : 27-APR-2018     *****
+ ***** YOUR PROGRAM PASSWORDS WILL EXPIRE ON 30-APR-2018  *****
+
+
+ A configuration file with new passwords is issued prior to the expiration
+ date provided a valid SESAM licence/fully paid Maintenance Agreement is 
+ in effect.
+ Please consult with your company's SESAM Contact Person.
+
+ *****           EXECUTION CONTINUES            *****
+
+
+               Library     Version    Impl.Upd   Release date
+               ELLIBD      1.9-07                26-NOV-2014
+               SIFTOOLD    8.3-09                26-NOV-2014
+               NORSAMD     8.4-02                26-NOV-2014
+               MFR         8.3-05                26-NOV-2014
+               PRIMAS      5.3-04                26-NOV-2014
+               AUXLIB      8.2-02                26-NOV-2014
+               SESTRA_PRLL 8.1-02                26-NOV-2014
+
+               Run identification   : Job1 - SestraActivity1                                                     
+                                                                                                                 
+                                                                                                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:09   ***************  SESTRA  ***************                                             PAGE:     1
+                                                                                                                                    
+                                    DATA GENERATION MODULE                                                                          
+                                                                                                                     SUB PAGE:     1
+                                                                                                                                    
+  PRINTOUT OF DATA GIVEN AS DIRECT INPUT TO SESTRA                                                                                  
+                                                                                                                                    
+   COMM Generated by Sesam Manager: 27.04.2018 14:21:03                                                                             
+   COMM ---------------------------------------------------------------------------                                                 
+   HEAD Job1 - SestraActivity1                                                                                                      
+   COMM Superelement: 100                                                                                                           
+   COMM Static analysis                                                                                                             
+   COMM Multifront solver used                                                                                                      
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM Data Formats - the numbers are right adjusted in the fields                                                                 
+   COMM <-1-><-2-><-3-><-4-><-5-><-6-><-7-><-8-><-9-><---10---><---11---><---12--->                                                 
+   COMM <-1-><----2---><----3---><----4---><----5---><----6---><----7---><----8--->                                                 
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM CHECK ANTP MSUM MOLO STIF RTOP LBCK      PILE     CSIGN      SIGM                                                           
+   CMAS    0.   1.   1.   0.   0.   0.   0.   0.   0.  0.00E+00  0.00E+00  0.00E+00                                                 
+   COMM         PREF                   FORMAT                                                                                       
+   INAM ..\assembly\                                                                                                                
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM         PREF                   FORMAT                                                                                       
+   LNAM ..\assembly\                                                                                                                
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM  ITP1                                                                                                                       
+   ITOP  100.   0.   0.   0.   0.   0.   0.   0.   0.  0.00E+00  0.00E+00  0.00E+00                                                 
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM                 WCOR                                                                                                        
+   ELOP    0.   0.   0.   1.   0.   0.   0.   0.   0.  0.00E+00  0.00E+00  0.00E+00                                                 
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM SOLVE     ORDER           COND INFO     CACHE   MFRWORK                                                                     
+   SOLM    0.   0.   0.   0.   0.   0.   0.   0.   0.  0.00E+00  0.00E+00  0.00E+00                                                 
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM         PREF                   FORMAT                                                                                       
+   RNAM ..\assembly\                      SIU                                                                                       
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM  RTRA PRNT STOR EQUI                                                                                                        
+   RETR    3.   0.   0.   0.   0.   0.   0.   0.   0.  0.00E+00  0.00E+00  0.00E+00                                                 
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM  ISE1 ISE2 ISE3 ISE4 ISE5 ISE6 ISE7 ISE8                                                                                    
+   RSEL    1.   0.   0.   0.   0.   0.   1.   0.   0.  0.00E+00  0.00E+00  0.00E+00                                                 
+   COMM ---------------------------------------------------------------------------                                                 
+   COMM  ZPRI PREA                                                                                                                  
+   CPRI    0.   1.   0.   0.   0.   0.   0.   0.   0.  0.00E+00  0.00E+00  0.00E+00                                                 
+   COMM ---------------------------------------------------------------------------                                                 
+   Z                                                                                                                                
+
+ DATE: 27-APR-2018 TIME: 14:21:09   ***************  SESTRA  ***************                                             PAGE:     2
+                                                                                                                                    
+                                    DATA GENERATION MODULE                                                                          
+                                                                                                                     SUB PAGE:     2
+  INTERPRETATION OF ANALYSIS CONTROL DATA                                                                                           
+                                                                                                                                    
+                                                                                                                                    
+      Type of Analysis :                                                                                                            
+ 
+         Reduction                                                                                                                  
+         Multifront Solver is used                                                                                                  
+         Retracking                                                                                                                 
+ 
+ 
+      Input from CMAS Command :                                                                                                     
+ 
+         ANTYP = 1   Static Analysis                                                                                                
+         MSUM  > 0   Calculation of Sum of Masses and Centroid                                                                      
+ 
+         The singularity constant for membrane and shell elements                                                                   
+         CSING =  1.0000E-08                                                                                                        
+ 
+         Lowest accepted condition number in reduction                                                                              
+         EPSSOL=  1.1102E-14                                                                                                        
+ 
+ 
+      Input from RSEL Command :                                                                                                     
+ 
+         Data types selected for storing on Results File :                                                                          
+          - Input Interface File Records,                                                                                           
+          - displacements,  sequence:                                                                                               
+               all nodes for the first resultcase, all nodes for the second resultcase, etc.                                        
+          - forces and moments for beam, spring and layered shell elements,  sequence:                                              
+               all elements for the first resultcase, all elements for the second resultcase, etc.                                  
+          - stresses (not for beam or spring elements),  sequence:                                                                  
+               all elements for the first resultcase, all elements for the second resultcase, etc.                                  
+ 
+         (Can be redefined by RSEL for selected superelements, see below.)                                                          
+         Storing is done for superelements specified in RETR command.                                                               
+
+ DATE: 27-APR-2018 TIME: 14:21:09   ***************  SESTRA  ***************                                             PAGE:     3
+                                                                                                                                    
+                                    DATA GENERATION MODULE                                                                          
+                                                                                                                     SUB PAGE:     3
+                                                                                                                                    
+  INPUT INTERFACE FILES :                                                                                                           
+                                                                                                                                    
+                                                                                                                                    
+     ..\assembly\T100.FEM                                                                                                           
+                                                                         
+         DATE:     27-APR-2018         TIME:         14:16:56            
+         PROGRAM:  SESAM PRESEL        VERSION:      7.4-03 18-JAN-2011  
+         COMPUTER: 586 WIN NT 6.1 [7601INSTALLATION: , INOCEAN70         
+         USER:     AGH                 ACCOUNT:                          
+ 
+     ..\assembly\T10.FEM                                                                                                            
+                                                                         
+         DATE:     27-APR-2018         TIME:         14:16:56            
+         PROGRAM:  SESAM PRESEL        VERSION:      7.4-03 18-JAN-2011  
+         COMPUTER: 586 WIN NT 6.1 [7601INSTALLATION: , INOCEAN70         
+         USER:     AGH                 ACCOUNT:                          
+ 
+     ..\assembly\T20.FEM                                                                                                            
+                                                                         
+         DATE:     27-APR-2018         TIME:         14:16:56            
+         PROGRAM:  SESAM PRESEL        VERSION:      7.4-03 18-JAN-2011  
+         COMPUTER: 586 WIN NT 6.1 [7601INSTALLATION: , INOCEAN70         
+         USER:     AGH                 ACCOUNT:                          
+ 
+     ..\assembly\T1.FEM                                                                                                             
+                                                                         
+         DATE:     27-Apr-2018         TIME:          13:34:19           
+         PROGRAM:  SESAM GeniE         VERSION:       V7.7-04 15-Jan-2018
+         COMPUTER: X86 Windows         INSTALLATION:                     
+         USER:     agh                 ACCOUNT:                          
+ 
+     ..\assembly\T2.FEM                                                                                                             
+                                                                         
+         DATE:     27-Apr-2018         TIME:          13:33:22           
+         PROGRAM:  SESAM GeniE         VERSION:       V7.7-04 15-Jan-2018
+         COMPUTER: X86 Windows         INSTALLATION:                     
+         USER:     agh                 ACCOUNT:                          
+ 
+     ..\assembly\T3.FEM                                                                                                             
+                                                                         
+         DATE:     27-Apr-2018         TIME:          13:34:38           
+         PROGRAM:  SESAM GeniE         VERSION:       V7.7-04 15-Jan-2018
+         COMPUTER: X86 Windows         INSTALLATION:                     
+         USER:     agh                 ACCOUNT:                          
+ 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:     4
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE     1                                                        
+                                                                                                                     SUB PAGE:     4
+ 
+      *** SUMMARY OF DATA FROM INPUT AND LOAD INTERFACE FILES ***                                                                   
+               FOR SUPERELEMENT TYPE       1  ON LEVEL  1                                                                           
+ 
+      The superelement has                                                                                                          
+                                                                                                                                    
+             4  subelements                                                                                                         
+            12  nodes                                                                                                               
+            11  specified (fixed) degrees of freedom                                                                                
+            37  internal (free) degrees of freedom                                                                                  
+            24  retained (super) degrees of freedom                                                                                 
+          totally                                                                                                                   
+            72  degrees of freedom                                                                                                  
+                                                                                                                                    
+             0  loadcases                                                                                                           
+                                                                                                                                    
+                                                                                                                                    
+      The following basic elements are given:                                                                                       
+             4  3 node beam elements         BTSS                                                                                   
+                                                                                                                                    
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:     5
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE     1                                                        
+                                                                                                                     SUB PAGE:     5
+                                                                                                                                    
+      *** SUM OF MASSES AND CENTROID FOR SUPERELEMENT TYPE     1  ON LEVEL  1  ***                                                  
+                                                                                                                                    
+                                                                                                                                    
+   MASS MATRIX IN GLOBAL COORDINATE SYSTEM (OF THE SUPERELEMENT):                                                                   
+   ---------------------------------------                                                                                          
+   1.71644E-03    5.59610E-51    4.94461E-50    3.74187E-49   -1.28733E-03   -6.43665E-03                                           
+   5.59610E-51    1.71644E-03    0.00000E+00    1.28733E-03   -5.34553E-51    1.28733E-02                                           
+   4.94461E-50    0.00000E+00    1.71644E-03    6.43665E-03   -1.28733E-02   -3.71514E-49                                           
+   3.74187E-49    1.28733E-03    6.43665E-03    4.96345E-02   -4.82749E-02    9.65498E-03                                           
+  -1.28733E-03   -5.34553E-51   -1.28733E-02   -4.82749E-02    1.94459E-01    4.82749E-03                                           
+  -6.43665E-03    1.28733E-02   -3.71514E-49    9.65498E-03    4.82749E-03    2.41519E-01                                           
+                                                                                                                                    
+                                                                                                                                    
+   COORDINATES OF CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   7.5000E+00     3.7500E+00    -7.5000E-01                                                                                         
+ 
+ 
+   MASS MATRIX AT CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   1.71644E-03    5.59610E-51    4.94461E-50    1.84567E-49    0.00000E+00    0.00000E+00                                           
+   5.59610E-51    1.71644E-03    0.00000E+00    0.00000E+00   -1.14845E-51    0.00000E+00                                           
+   4.94461E-50    0.00000E+00    1.71644E-03    0.00000E+00    0.00000E+00   -1.86091E-49                                           
+   1.84567E-49    0.00000E+00    0.00000E+00    2.45315E-02   -2.08167E-17    1.73472E-18                                           
+   0.00000E+00   -1.14845E-51    0.00000E+00   -2.08167E-17    9.69439E-02    8.67362E-19                                           
+   0.00000E+00    0.00000E+00   -1.86091E-49    1.73472E-18    8.67362E-19    1.20832E-01                                           
+ 
+  *** Estimated size of stiffness matrix for superelement       1:         723 variables                                            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:     6
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE     2                                                        
+                                                                                                                     SUB PAGE:     6
+ 
+      *** SUMMARY OF DATA FROM INPUT AND LOAD INTERFACE FILES ***                                                                   
+               FOR SUPERELEMENT TYPE       2  ON LEVEL  1                                                                           
+ 
+      The superelement has                                                                                                          
+                                                                                                                                    
+           360  subelements                                                                                                         
+           589  nodes                                                                                                               
+          3510  internal (free) degrees of freedom                                                                                  
+            24  retained (super) degrees of freedom                                                                                 
+          totally                                                                                                                   
+          3534  degrees of freedom                                                                                                  
+                                                                                                                                    
+             2  loadcases                                                                                                           
+                                                                                                                                    
+                                                                                                                                    
+      The following kinds of loads are given:                                                                                       
+            node loads                                                                                                              
+            gravitational load                                                                                                      
+                                                                                                                                    
+      The following basic elements are given:                                                                                       
+            92  3 node beam elements         BTSS                                                                                   
+           268  6 node curved shell elements SCTS                                                                                   
+                                                                                                                                    
+        Eccentricities are given                                                                                                    
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:     7
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE     2                                                        
+                                                                                                                     SUB PAGE:     7
+                                                                                                                                    
+      *** SUM OF LOADS AND MOMENTS FOR SUPERELEMENT TYPE     2  ON LEVEL  1  ***                                                    
+                                                                                                                                    
+     X-LOAD = SUM OF GIVEN LOADS IN GLOBAL X-DIRECTION                                                                              
+     Y-LOAD = SUM OF GIVEN LOADS IN GLOBAL Y-DIRECTION                                                                              
+     Z-LOAD = SUM OF GIVEN LOADS IN GLOBAL Z-DIRECTION                                                                              
+     X-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL X-AXIS                                                                              
+     Y-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Y-AXIS                                                                              
+     Z-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Z-AXIS                                                                              
+     X-RMOM = SUM OF MOMENTS ABOUT GLOBAL X-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Y-RMOM = SUM OF MOMENTS ABOUT GLOBAL Y-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Z-RMOM = SUM OF MOMENTS ABOUT GLOBAL Z-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+                                                                                                                                    
+      LOADCASE    X-LOAD      Y-LOAD      Z-LOAD      X-MOM       Y-MOM       Z-MOM      X-RMOM      Y-RMOM      Z-RMOM             
+           1  1.6691E-66 -1.2685E-34 -3.1466E-01  1.2108E-35  3.3383E-67  0.0000E+00 -1.1800E+00  2.3599E+00 -9.5136E-34            
+           2  0.0000E+00  0.0000E+00 -1.0000E-01  0.0000E+00  0.0000E+00  0.0000E+00 -3.7500E-01  7.5000E-01  0.0000E+00            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:     8
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE     2                                                        
+                                                                                                                     SUB PAGE:     8
+                                                                                                                                    
+      *** SUM OF MASSES AND CENTROID FOR SUPERELEMENT TYPE     2  ON LEVEL  1  ***                                                  
+                                                                                                                                    
+                                                                                                                                    
+   MASS MATRIX IN GLOBAL COORDINATE SYSTEM (OF THE SUPERELEMENT):                                                                   
+   ---------------------------------------                                                                                          
+   3.20751E-02    2.53907E-36    0.00000E+00    1.26953E-36   -1.04209E-02   -1.20282E-01                                           
+   2.53907E-36    3.20751E-02    1.29304E-35    1.04209E-02   -9.57088E-35    2.40563E-01                                           
+   0.00000E+00    1.29304E-35    3.20751E-02    1.20282E-01   -2.40563E-01    9.69783E-35                                           
+   1.26953E-36    1.04209E-02    1.20282E-01    7.17491E-01   -9.02112E-01    7.81566E-02                                           
+  -1.04209E-02   -9.57088E-35   -2.40563E-01   -9.02112E-01    2.59188E+00    3.90783E-02                                           
+  -1.20282E-01    2.40563E-01    9.69783E-35    7.81566E-02    3.90783E-02    3.29298E+00                                           
+                                                                                                                                    
+                                                                                                                                    
+   COORDINATES OF CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   7.5000E+00     3.7500E+00    -3.2489E-01                                                                                         
+ 
+ 
+   MASS MATRIX AT CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   3.20751E-02    2.53907E-36    0.00000E+00    4.44616E-37   -1.73472E-18   -1.38778E-17                                           
+   2.53907E-36    3.20751E-02    1.29304E-35    1.73472E-18    2.09445E-36    0.00000E+00                                           
+   0.00000E+00    1.29304E-35    3.20751E-02    1.38778E-17    0.00000E+00    8.55285E-50                                           
+   4.44616E-37    1.73472E-18    1.38778E-17    2.63050E-01    1.36557E-12    2.92301E-16                                           
+  -1.73472E-18    2.09445E-36    0.00000E+00    1.36557E-12    7.84267E-01    1.60028E-16                                           
+  -1.38778E-17    0.00000E+00    8.55285E-50    2.92301E-16    1.60028E-16    1.03770E+00                                           
+ 
+  *** Estimated size of stiffness matrix for superelement       2:      350912 variables                                            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:     9
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE     3                                                        
+                                                                                                                     SUB PAGE:     9
+ 
+      *** SUMMARY OF DATA FROM INPUT AND LOAD INTERFACE FILES ***                                                                   
+               FOR SUPERELEMENT TYPE       3  ON LEVEL  1                                                                           
+ 
+      The superelement has                                                                                                          
+                                                                                                                                    
+            55  subelements                                                                                                         
+           125  nodes                                                                                                               
+           594  internal (free) degrees of freedom                                                                                  
+           156  retained (super) degrees of freedom                                                                                 
+          totally                                                                                                                   
+           750  degrees of freedom                                                                                                  
+                                                                                                                                    
+             4  loadcases                                                                                                           
+                                                                                                                                    
+                                                                                                                                    
+      The following kinds of loads are given:                                                                                       
+            node loads                                                                                                              
+            line loads                                                                                                              
+            gravitational load                                                                                                      
+                                                                                                                                    
+      The following basic elements are given:                                                                                       
+            23  3 node beam elements         BTSS                                                                                   
+            32  8 node curved shell elements SCQS                                                                                   
+                                                                                                                                    
+        Eccentricities are given                                                                                                    
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    10
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE     3                                                        
+                                                                                                                     SUB PAGE:    10
+                                                                                                                                    
+      *** SUM OF LOADS AND MOMENTS FOR SUPERELEMENT TYPE     3  ON LEVEL  1  ***                                                    
+                                                                                                                                    
+     X-LOAD = SUM OF GIVEN LOADS IN GLOBAL X-DIRECTION                                                                              
+     Y-LOAD = SUM OF GIVEN LOADS IN GLOBAL Y-DIRECTION                                                                              
+     Z-LOAD = SUM OF GIVEN LOADS IN GLOBAL Z-DIRECTION                                                                              
+     X-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL X-AXIS                                                                              
+     Y-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Y-AXIS                                                                              
+     Z-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Z-AXIS                                                                              
+     X-RMOM = SUM OF MOMENTS ABOUT GLOBAL X-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Y-RMOM = SUM OF MOMENTS ABOUT GLOBAL Y-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Z-RMOM = SUM OF MOMENTS ABOUT GLOBAL Z-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+                                                                                                                                    
+      LOADCASE    X-LOAD      Y-LOAD      Z-LOAD      X-MOM       Y-MOM       Z-MOM      X-RMOM      Y-RMOM      Z-RMOM             
+           1  2.2975E-18  1.0387E-19 -1.2330E-01 -6.1809E-35  2.8598E-35  0.0000E+00 -1.1109E-01  2.9551E-01 -3.5287E-33            
+           2  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00            
+           3  0.0000E+00  0.0000E+00 -5.0000E-02  0.0000E+00  0.0000E+00  0.0000E+00 -1.8750E-01  3.7500E-01  0.0000E+00            
+           4  3.7500E-01  0.0000E+00  0.0000E+00  0.0000E+00 -1.8750E-01  0.0000E+00  0.0000E+00  2.6250E+00 -7.0313E-01            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    11
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE     3                                                        
+                                                                                                                     SUB PAGE:    11
+                                                                                                                                    
+      *** SUM OF MASSES AND CENTROID FOR SUPERELEMENT TYPE     3  ON LEVEL  1  ***                                                  
+                                                                                                                                    
+                                                                                                                                    
+   MASS MATRIX IN GLOBAL COORDINATE SYSTEM (OF THE SUPERELEMENT):                                                                   
+   ---------------------------------------                                                                                          
+   1.25689E-02    0.00000E+00   -2.34205E-19    0.00000E+00    7.35626E-02   -1.13243E-02                                           
+   0.00000E+00    1.25689E-02   -1.05879E-20   -7.35626E-02   -3.59701E-34    3.01229E-02                                           
+  -2.34205E-19   -1.05879E-20    1.25689E-02    1.13243E-02   -3.01229E-02    3.59701E-34                                           
+   0.00000E+00   -7.35626E-02    1.13243E-02    5.17889E-01   -2.56575E-02   -2.04737E-01                                           
+   7.35626E-02   -3.59701E-34   -3.01229E-02   -2.56575E-02    6.40170E-01   -7.73033E-02                                           
+  -1.13243E-02    3.01229E-02    3.59701E-34   -2.04737E-01   -7.73033E-02    1.79248E-01                                           
+                                                                                                                                    
+                                                                                                                                    
+   COORDINATES OF CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   2.3966E+00     9.0098E-01     5.8528E+00                                                                                         
+ 
+ 
+   MASS MATRIX AT CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   1.25689E-02    0.00000E+00   -2.34205E-19    2.11014E-19    0.00000E+00    0.00000E+00                                           
+   0.00000E+00    1.25689E-02   -1.05879E-20    0.00000E+00   -2.53752E-20    0.00000E+00                                           
+  -2.34205E-19   -1.05879E-20    1.25689E-02    0.00000E+00    0.00000E+00   -1.85639E-19                                           
+   2.11014E-19    0.00000E+00    0.00000E+00    7.71426E-02    1.48260E-03   -2.84355E-02                                           
+   0.00000E+00   -2.53752E-20    0.00000E+00    1.48260E-03    1.37433E-01   -1.10248E-02                                           
+   0.00000E+00    0.00000E+00   -1.85639E-19   -2.84355E-02   -1.10248E-02    9.68522E-02                                           
+ 
+  *** Estimated size of stiffness matrix for superelement       3:       89676 variables                                            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    12
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE    10                                                        
+                                                                                                                     SUB PAGE:    12
+ 
+      *** SUMMARY OF DATA FROM INPUT AND LOAD INTERFACE FILES ***                                                                   
+               FOR SUPERELEMENT TYPE      10  ON LEVEL  2                                                                           
+ 
+      The superelement has                                                                                                          
+                                                                                                                                    
+             2  subelements                                                                                                         
+             4  nodes                                                                                                               
+            24  retained (super) degrees of freedom                                                                                 
+          totally                                                                                                                   
+            24  degrees of freedom                                                                                                  
+                                                                                                                                    
+             2  loadcases                                                                                                           
+                                                                                                                                    
+                                                                                                                                    
+      The following kinds of loads are given:                                                                                       
+            load combinations                                                                                                       
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    13
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE    10                                                        
+                                                                                                                     SUB PAGE:    13
+                                                                                                                                    
+      *** SUM OF LOADS AND MOMENTS FOR SUPERELEMENT TYPE    10  ON LEVEL  2  ***                                                    
+                                                                                                                                    
+     X-LOAD = SUM OF GIVEN LOADS IN GLOBAL X-DIRECTION                                                                              
+     Y-LOAD = SUM OF GIVEN LOADS IN GLOBAL Y-DIRECTION                                                                              
+     Z-LOAD = SUM OF GIVEN LOADS IN GLOBAL Z-DIRECTION                                                                              
+     X-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL X-AXIS                                                                              
+     Y-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Y-AXIS                                                                              
+     Z-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Z-AXIS                                                                              
+     X-RMOM = SUM OF MOMENTS ABOUT GLOBAL X-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Y-RMOM = SUM OF MOMENTS ABOUT GLOBAL Y-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Z-RMOM = SUM OF MOMENTS ABOUT GLOBAL Z-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+                                                                                                                                    
+      LOADCASE    X-LOAD      Y-LOAD      Z-LOAD      X-MOM       Y-MOM       Z-MOM      X-RMOM      Y-RMOM      Z-RMOM             
+           1  1.6691E-66 -1.2685E-34 -3.1466E-01  1.2108E-35  3.3383E-67  0.0000E+00 -1.1800E+00  2.3599E+00 -9.5136E-34            
+           2  0.0000E+00  0.0000E+00 -1.0000E-01  0.0000E+00  0.0000E+00  0.0000E+00 -3.7500E-01  7.5000E-01  0.0000E+00            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    14
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE    10                                                        
+                                                                                                                     SUB PAGE:    14
+  *** LOAD COMBINATIONS FOR SUPERELEMENTTYPE   10   ON LEVEL    2  ***                                                              
+                                                                                                                                    
+ LLLC = LOAD COMBINATION NUMBER ON LOWER LEVEL SUBELEMENTS                                                                          
+                                                                                                                                    
+ 
+  SUBELEMENT    2  LOAD COMBINATION    1                                                                                            
+  LLLC  :           1           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+ 
+  SUBELEMENT    2  LOAD COMBINATION    2                                                                                            
+  LLLC  :           2           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    15
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE    10                                                        
+                                                                                                                     SUB PAGE:    15
+                                                                                                                                    
+      *** SUM OF MASSES AND CENTROID FOR SUPERELEMENT TYPE    10  ON LEVEL  2  ***                                                  
+                                                                                                                                    
+                                                                                                                                    
+   MASS MATRIX IN GLOBAL COORDINATE SYSTEM (OF THE SUPERELEMENT):                                                                   
+   ---------------------------------------                                                                                          
+   3.37915E-02    2.53907E-36    4.94461E-50    1.26953E-36   -1.17082E-02   -1.26718E-01                                           
+   2.53907E-36    3.37915E-02    1.29304E-35    1.17082E-02   -9.57088E-35    2.53437E-01                                           
+   4.94461E-50    1.29304E-35    3.37915E-02    1.26718E-01   -2.53437E-01    9.69783E-35                                           
+   1.26953E-36    1.17082E-02    1.26718E-01    7.67126E-01   -9.50387E-01    8.78115E-02                                           
+  -1.17082E-02   -9.57088E-35   -2.53437E-01   -9.50387E-01    2.78634E+00    4.39058E-02                                           
+  -1.26718E-01    2.53437E-01    9.69783E-35    8.78115E-02    4.39058E-02    3.53450E+00                                           
+                                                                                                                                    
+                                                                                                                                    
+   COORDINATES OF CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   7.5000E+00     3.7500E+00    -3.4648E-01                                                                                         
+ 
+ 
+   MASS MATRIX AT CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   3.37915E-02    2.53907E-36    4.94461E-50    3.89789E-37    1.73472E-18    0.00000E+00                                           
+   2.53907E-36    3.37915E-02    1.29304E-35   -1.73472E-18    2.14928E-36    0.00000E+00                                           
+   4.94461E-50    1.29304E-35    3.37915E-02    0.00000E+00    0.00000E+00   -1.06911E-49                                           
+   3.89789E-37   -1.73472E-18    0.00000E+00    2.87875E-01    1.36569E-12    3.04444E-16                                           
+   1.73472E-18    2.14928E-36    0.00000E+00    1.36569E-12    8.81505E-01    1.66100E-16                                           
+   0.00000E+00    0.00000E+00   -1.06911E-49    3.04444E-16    1.66100E-16    1.15853E+00                                           
+ 
+  *** Estimated size of stiffness matrix for superelement      10:         576 variables                                            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    16
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE    20                                                        
+                                                                                                                     SUB PAGE:    16
+ 
+      *** SUMMARY OF DATA FROM INPUT AND LOAD INTERFACE FILES ***                                                                   
+               FOR SUPERELEMENT TYPE      20  ON LEVEL  2                                                                           
+ 
+      The superelement has                                                                                                          
+                                                                                                                                    
+             4  subelements                                                                                                         
+            53  nodes                                                                                                               
+           294  internal (free) degrees of freedom                                                                                  
+            24  retained (super) degrees of freedom                                                                                 
+          totally                                                                                                                   
+           318  degrees of freedom                                                                                                  
+                                                                                                                                    
+             2  loadcases                                                                                                           
+                                                                                                                                    
+                                                                                                                                    
+      The following kinds of loads are given:                                                                                       
+            load combinations                                                                                                       
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    17
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE    20                                                        
+                                                                                                                     SUB PAGE:    17
+                                                                                                                                    
+      *** SUM OF LOADS AND MOMENTS FOR SUPERELEMENT TYPE    20  ON LEVEL  2  ***                                                    
+                                                                                                                                    
+     X-LOAD = SUM OF GIVEN LOADS IN GLOBAL X-DIRECTION                                                                              
+     Y-LOAD = SUM OF GIVEN LOADS IN GLOBAL Y-DIRECTION                                                                              
+     Z-LOAD = SUM OF GIVEN LOADS IN GLOBAL Z-DIRECTION                                                                              
+     X-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL X-AXIS                                                                              
+     Y-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Y-AXIS                                                                              
+     Z-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Z-AXIS                                                                              
+     X-RMOM = SUM OF MOMENTS ABOUT GLOBAL X-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Y-RMOM = SUM OF MOMENTS ABOUT GLOBAL Y-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Z-RMOM = SUM OF MOMENTS ABOUT GLOBAL Z-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+                                                                                                                                    
+      LOADCASE    X-LOAD      Y-LOAD      Z-LOAD      X-MOM       Y-MOM       Z-MOM      X-RMOM      Y-RMOM      Z-RMOM             
+           1  9.0804E-27 -2.0086E-25 -4.9320E-01  2.5001E-42  5.4035E-42  0.0000E+00 -1.8495E+00  3.6990E+00 -3.3894E-24            
+           2  0.0000E+00  0.0000E+00 -5.0000E-02  0.0000E+00  0.0000E+00  0.0000E+00 -1.8750E-01  3.7500E-01  0.0000E+00            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    18
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE    20                                                        
+                                                                                                                     SUB PAGE:    18
+  *** LOAD COMBINATIONS FOR SUPERELEMENTTYPE   20   ON LEVEL    2  ***                                                              
+                                                                                                                                    
+ LLLC = LOAD COMBINATION NUMBER ON LOWER LEVEL SUBELEMENTS                                                                          
+                                                                                                                                    
+ 
+  SUBELEMENT    4  LOAD COMBINATION    1                                                                                            
+  LLLC  :           1           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+ 
+  SUBELEMENT    3  LOAD COMBINATION    1                                                                                            
+  LLLC  :           1           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+ 
+  SUBELEMENT    2  LOAD COMBINATION    1                                                                                            
+  LLLC  :           1           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+ 
+  SUBELEMENT    1  LOAD COMBINATION    1                                                                                            
+  LLLC  :           1           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+ 
+  SUBELEMENT    1  LOAD COMBINATION    2                                                                                            
+  LLLC  :           3           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    19
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE    20                                                        
+                                                                                                                     SUB PAGE:    19
+                                                                                                                                    
+      *** SUM OF MASSES AND CENTROID FOR SUPERELEMENT TYPE    20  ON LEVEL  2  ***                                                  
+                                                                                                                                    
+                                                                                                                                    
+   MASS MATRIX IN GLOBAL COORDINATE SYSTEM (OF THE SUPERELEMENT):                                                                   
+   ---------------------------------------                                                                                          
+   5.02755E-02    0.00000E+00   -9.25625E-28   -3.47325E-26    2.94250E-01   -1.88533E-01                                           
+   0.00000E+00    5.02755E-02    2.04748E-26   -2.94250E-01   -3.10768E-25    3.77067E-01                                           
+  -9.25625E-28    2.04748E-26    5.02755E-02    1.88533E-01   -3.77067E-01    3.45500E-25                                           
+  -3.47325E-26   -2.94250E-01    1.88533E-01    3.14583E+00   -1.41400E+00   -2.20688E+00                                           
+   2.94250E-01   -3.10768E-25   -3.77067E-01   -1.41400E+00    6.40931E+00   -1.10344E+00                                           
+  -1.88533E-01    3.77067E-01    3.45500E-25   -2.20688E+00   -1.10344E+00    5.63989E+00                                           
+                                                                                                                                    
+                                                                                                                                    
+   COORDINATES OF CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   7.5000E+00     3.7500E+00     5.8528E+00                                                                                         
+ 
+ 
+   MASS MATRIX AT CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   5.02755E-02    0.00000E+00   -9.25625E-28   -3.12614E-26    0.00000E+00   -1.66533E-16                                           
+   0.00000E+00    5.02755E-02    2.04748E-26    0.00000E+00   -1.57207E-25    3.33067E-16                                           
+  -9.25625E-28    2.04748E-26    5.02755E-02   -1.94289E-16    3.88578E-16    1.88468E-25                                           
+  -3.12614E-26    0.00000E+00   -1.94289E-16    7.16652E-01    6.29145E-10   -9.63817E-10                                           
+   0.00000E+00   -1.57207E-25    3.88578E-16    6.29145E-10    1.85913E+00    2.48591E-09                                           
+  -1.66533E-16    3.33067E-16    1.88468E-25   -9.63817E-10    2.48591E-09    2.10489E+00                                           
+ 
+  *** Estimated size of stiffness matrix for superelement      20:       57024 variables                                            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    20
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE   100                                                        
+                                                                                                                     SUB PAGE:    20
+ 
+      *** SUMMARY OF DATA FROM INPUT AND LOAD INTERFACE FILES ***                                                                   
+               FOR SUPERELEMENT TYPE     100  ON LEVEL  3                                                                           
+ 
+      The superelement has                                                                                                          
+                                                                                                                                    
+             2  subelements                                                                                                         
+             4  nodes                                                                                                               
+            24  internal (free) degrees of freedom                                                                                  
+          totally                                                                                                                   
+            24  degrees of freedom                                                                                                  
+                                                                                                                                    
+             3  loadcases                                                                                                           
+                                                                                                                                    
+                                                                                                                                    
+      The following kinds of loads are given:                                                                                       
+            load combinations                                                                                                       
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    21
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE   100                                                        
+                                                                                                                     SUB PAGE:    21
+                                                                                                                                    
+      *** SUM OF LOADS AND MOMENTS FOR SUPERELEMENT TYPE   100  ON LEVEL  3  ***                                                    
+                                                                                                                                    
+     X-LOAD = SUM OF GIVEN LOADS IN GLOBAL X-DIRECTION                                                                              
+     Y-LOAD = SUM OF GIVEN LOADS IN GLOBAL Y-DIRECTION                                                                              
+     Z-LOAD = SUM OF GIVEN LOADS IN GLOBAL Z-DIRECTION                                                                              
+     X-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL X-AXIS                                                                              
+     Y-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Y-AXIS                                                                              
+     Z-MOM  = SUM OF LOCAL MOMENTS ABOUT GLOBAL Z-AXIS                                                                              
+     X-RMOM = SUM OF MOMENTS ABOUT GLOBAL X-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Y-RMOM = SUM OF MOMENTS ABOUT GLOBAL Y-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+     Z-RMOM = SUM OF MOMENTS ABOUT GLOBAL Z-AXIS FROM GIVEN LOADS AND MOMENTS                                                       
+                                                                                                                                    
+      LOADCASE    X-LOAD      Y-LOAD      Z-LOAD      X-MOM       Y-MOM       Z-MOM      X-RMOM      Y-RMOM      Z-RMOM             
+           1  9.0804E-27 -2.0086E-25 -8.0786E-01  1.2108E-35  5.4035E-42  0.0000E+00 -3.0295E+00  6.0589E+00 -3.3894E-24            
+           2  0.0000E+00  0.0000E+00 -1.0000E-01  0.0000E+00  0.0000E+00  0.0000E+00 -3.7500E-01  7.5000E-01  0.0000E+00            
+           3  0.0000E+00  0.0000E+00 -5.0000E-02  0.0000E+00  0.0000E+00  0.0000E+00 -1.8750E-01  3.7500E-01  0.0000E+00            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    22
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE   100                                                        
+                                                                                                                     SUB PAGE:    22
+  *** LOAD COMBINATIONS FOR SUPERELEMENTTYPE  100   ON LEVEL    3  ***                                                              
+                                                                                                                                    
+ LLLC = LOAD COMBINATION NUMBER ON LOWER LEVEL SUBELEMENTS                                                                          
+                                                                                                                                    
+ 
+  SUBELEMENT    2  LOAD COMBINATION    1                                                                                            
+  LLLC  :           1           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+ 
+  SUBELEMENT    1  LOAD COMBINATION    1                                                                                            
+  LLLC  :           1           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+ 
+  SUBELEMENT    1  LOAD COMBINATION    2                                                                                            
+  LLLC  :           2           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+ 
+  SUBELEMENT    2  LOAD COMBINATION    3                                                                                            
+  LLLC  :           2           0                                                                                                   
+  FACTOR:  1.0000E+00  0.0000E+00                                                                                                   
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    23
+                                                                                                                                    
+                                    DATAGENERATION - SUPERELEMENT TYPE   100                                                        
+                                                                                                                     SUB PAGE:    23
+                                                                                                                                    
+      *** SUM OF MASSES AND CENTROID FOR SUPERELEMENT TYPE   100  ON LEVEL  3  ***                                                  
+                                                                                                                                    
+                                                                                                                                    
+   MASS MATRIX IN GLOBAL COORDINATE SYSTEM (OF THE SUPERELEMENT):                                                                   
+   ---------------------------------------                                                                                          
+   8.40671E-02    2.53907E-36   -9.25625E-28   -3.47325E-26    2.82542E-01   -3.15252E-01                                           
+   2.53907E-36    8.40671E-02    2.04748E-26   -2.82542E-01   -3.10768E-25    6.30503E-01                                           
+  -9.25625E-28    2.04748E-26    8.40671E-02    3.15252E-01   -6.30503E-01    3.45500E-25                                           
+  -3.47325E-26   -2.82542E-01    3.15252E-01    3.91295E+00   -2.36439E+00   -2.11907E+00                                           
+   2.82542E-01   -3.10768E-25   -6.30503E-01   -2.36439E+00    9.19564E+00   -1.05953E+00                                           
+  -3.15252E-01    6.30503E-01    3.45500E-25   -2.11907E+00   -1.05953E+00    9.17439E+00                                           
+                                                                                                                                    
+                                                                                                                                    
+   COORDINATES OF CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   7.5000E+00     3.7500E+00     3.3609E+00                                                                                         
+ 
+ 
+   MASS MATRIX AT CENTROID:                                                                                                         
+   ------------------------                                                                                                         
+   8.40671E-02    2.53907E-36   -9.25625E-28   -3.12614E-26    0.00000E+00   -1.66533E-16                                           
+   2.53907E-36    8.40671E-02    2.04748E-26    0.00000E+00   -1.57207E-25    4.44089E-16                                           
+  -9.25625E-28    2.04748E-26    8.40671E-02   -1.66533E-16    3.33067E-16    1.88468E-25                                           
+  -3.12614E-26    0.00000E+00   -1.66533E-16    1.78116E+00    6.30511E-10   -1.42150E-08                                           
+   0.00000E+00   -1.57207E-25    3.33067E-16    6.30511E-10    3.51727E+00    1.27643E-08                                           
+  -1.66533E-16    4.44089E-16    1.88468E-25   -1.42150E-08    1.27643E-08    3.26342E+00                                           
+ 
+  *** Estimated size of stiffness matrix for superelement     100:         576 variables                                            
+ 
+ 
+ 
+  *** Estimate of total size of stiffness matrices for new superelements:         499487 variables                                  
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    24
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE    1                                                       
+                                                                                                                     SUB PAGE:     1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS FACTORIZATION PERFORMED BY MULTIFRONT EQUATION SOLVER -                            
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    25
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE    2                                                       
+                                                                                                                     SUB PAGE:     2
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS FACTORIZATION PERFORMED BY MULTIFRONT EQUATION SOLVER -                            
+ 
+                                     - LOAD SUBSTITUTION PERFORMED BY  MULTIFRONT EQUATION SOLVER -                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    26
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE    3                                                       
+                                                                                                                     SUB PAGE:     3
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS FACTORIZATION PERFORMED BY MULTIFRONT EQUATION SOLVER -                            
+ 
+                                     - LOAD SUBSTITUTION PERFORMED BY  MULTIFRONT EQUATION SOLVER -                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    27
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE   -3                                                       
+                                                                                                                     SUB PAGE:     4
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS TRANSFORMATION PERFORMED         -                                                 
+ 
+                                     - LOAD TRANSFORMATION PERFORMED              -                                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    28
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE   -3                                                       
+                                                                                                                     SUB PAGE:     5
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS TRANSFORMATION PERFORMED         -                                                 
+ 
+                                     - LOAD TRANSFORMATION PERFORMED              -                                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    29
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE   -3                                                       
+                                                                                                                     SUB PAGE:     6
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS TRANSFORMATION PERFORMED         -                                                 
+ 
+                                     - LOAD TRANSFORMATION PERFORMED              -                                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    30
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE   10                                                       
+                                                                                                                     SUB PAGE:     7
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS MATRICES ALLOCATED               -                                                 
+ 
+                                     - LOAD MATRICES ALLOCATED                    -                                                 
+ 
+                                     - STIFFNESS MERGE PERFORMED                  -                                                 
+ 
+                                     - LOAD MERGE PERFORMED                       -                                                 
+ 
+                                     - STIFFNESS REDUCTION PERFORMED              -                                                 
+ 
+                                     - LOAD REDUCTION PERFORMED                   -                                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    31
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE   20                                                       
+                                                                                                                     SUB PAGE:     8
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS MATRICES ALLOCATED               -                                                 
+ 
+                                     - LOAD MATRICES ALLOCATED                    -                                                 
+ 
+                                     - STIFFNESS MERGE PERFORMED                  -                                                 
+ 
+                                     - LOAD MERGE PERFORMED                       -                                                 
+ 
+                                     - STIFFNESS REDUCTION PERFORMED              -                                                 
+ 
+                                     - LOAD REDUCTION PERFORMED                   -                                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    32
+                                                                                                                                    
+                                    REDUCTION MODULE - SUPERELEMENT TYPE  100                                                       
+                                                                                                                     SUB PAGE:     9
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                     - STIFFNESS MATRICES ALLOCATED               -                                                 
+ 
+                                     - LOAD MATRICES ALLOCATED                    -                                                 
+ 
+                                     - STIFFNESS MERGE PERFORMED                  -                                                 
+ 
+                                     - LOAD MERGE PERFORMED                       -                                                 
+ 
+                                     - STIFFNESS REDUCTION PERFORMED              -                                                 
+ 
+                                     - LOAD REDUCTION PERFORMED                   -                                                 
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    33
+                                                                                                                                    
+                                          STATIC ANALYSIS OF STRUCTURE                                                              
+                                                                                                                     SUB PAGE:     1
+ 
+ 
+ 
+      Results file name: ..\assembly\R100.SIU                                                                                       
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    34
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE    1                                                      
+                                    RETRACKING IDENTIFICATION:     1    1                                            SUB PAGE:     2
+                                                                                                                                    
+  REACTION FORCES IN NODES WITH SPECIFIED (FIXED) DEGREES OF FREEDOM.                                                               
+  NODES MARKED WITH AN ASTERISK (*) TO THE RIGHT HAVE A LOCAL COORDINATE SYSTEM.                                                    
+  ******************************************************************************                                                    
+                                                                                                                                    
+  LOADCASE (INDEX)                                                                                                                  
+       SUP.EL. IND NODE NO.      X             Y             Z            RX            RY            RZ                            
+ 
+        1                                                                                                                           
+            1   1      1  -1.94240E-02  -9.66260E-03   2.01882E-01   1.17967E-02  -5.95485E-02   7.41164E-04                        
+            1   1      4   1.94240E-02                 2.06018E-01                                                                  
+            1   1      7                 9.66260E-03   2.03621E-01                                                                  
+            1   1     10                               1.96339E-01                                                                  
+ 
+        2                                                                                                                           
+            1   1      1  -1.07817E-02  -5.38532E-03   2.46211E-02   3.34312E-03  -3.44623E-02   8.26702E-05                        
+            1   1      4   1.07817E-02                 2.76764E-02                                                                  
+            1   1      7                 5.38532E-03   2.58247E-02                                                                  
+            1   1     10                               2.18778E-02                                                                  
+ 
+        3                                                                                                                           
+            1   1      1   5.25312E-04   2.56340E-04   1.25336E-02  -7.40225E-06   1.74310E-03  -9.47500E-05                        
+            1   1      4  -5.25312E-04                 1.23502E-02                                                                  
+            1   1      7                -2.56340E-04   1.24654E-02                                                                  
+            1   1     10                               1.26508E-02                                                                  
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    35
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE    1                                                      
+                                    RETRACKING IDENTIFICATION:     1    1                                            SUB PAGE:     3
+                                                                                                                                    
+  SUM OF REACTION FORCES FROM SPECIFIED DEGREES OF FREEDOM.                                                                         
+  THE FORCES AND MOMENTS ARE REFFERED TO THE COORDINATE SYSTEM OF THE ACTUAL SUPERELEMENT.                                          
+  ****************************************************************************************                                          
+                                                                                                                                    
+  LOADCASE (INDEX)        X             Y             Z            RX            RY            RZ                                   
+ 
+        1            8.3638E-14   -5.8287E-15    8.0786E-01    3.0295E+00   -6.0589E+00   -3.6287E-08                               
+        2            4.4992E-14   -4.5372E-15    1.0000E-01    3.7500E-01   -7.5000E-01   -2.9733E-09                               
+        3            2.5774E-15   -2.4747E-16    5.0000E-02    1.8750E-01   -3.7500E-01   -7.1693E-09                               
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    36
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE    1                                                      
+                                    RETRACKING IDENTIFICATION:     1    1                                            SUB PAGE:     4
+ 
+ 
+ 
+      Results file name: ..\assembly\R1H3.SIU                                                                                       
+ 
+ 
+ 
+ SUPERELEMENT TYPE:     1 ACTUAL ELEMENT:     3                                                                                     
+ HAS BEEN STORED ON RESULT FILE                                                                                                     
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    37
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE    2                                                      
+                                    RETRACKING IDENTIFICATION:     1    2                                            SUB PAGE:     5
+ 
+ 
+ 
+      Results file name: ..\assembly\R2H4.SIU                                                                                       
+ 
+ 
+ 
+ SUPERELEMENT TYPE:     2 ACTUAL ELEMENT:     4                                                                                     
+ HAS BEEN STORED ON RESULT FILE                                                                                                     
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    38
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE    3                                                      
+                                    RETRACKING IDENTIFICATION:     2    1                                            SUB PAGE:     6
+ 
+ 
+ 
+      Results file name: ..\assembly\R3H6.SIU                                                                                       
+ 
+ 
+ 
+ SUPERELEMENT TYPE:     3 ACTUAL ELEMENT:     6                                                                                     
+ HAS BEEN STORED ON RESULT FILE                                                                                                     
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    39
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE    3                                                      
+                                    RETRACKING IDENTIFICATION:     2    2                                            SUB PAGE:     7
+ 
+ 
+ 
+      Results file name: ..\assembly\R3H7.SIU                                                                                       
+ 
+ 
+ 
+ SUPERELEMENT TYPE:     3 ACTUAL ELEMENT:     7                                                                                     
+ HAS BEEN STORED ON RESULT FILE                                                                                                     
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    40
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE    3                                                      
+                                    RETRACKING IDENTIFICATION:     2    3                                            SUB PAGE:     8
+ 
+ 
+ 
+      Results file name: ..\assembly\R3H8.SIU                                                                                       
+ 
+ 
+ 
+ SUPERELEMENT TYPE:     3 ACTUAL ELEMENT:     8                                                                                     
+ HAS BEEN STORED ON RESULT FILE                                                                                                     
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    41
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE    3                                                      
+                                    RETRACKING IDENTIFICATION:     2    4                                            SUB PAGE:     9
+ 
+ 
+ 
+      Results file name: ..\assembly\R3H9.SIU                                                                                       
+ 
+ 
+ 
+ SUPERELEMENT TYPE:     3 ACTUAL ELEMENT:     9                                                                                     
+ HAS BEEN STORED ON RESULT FILE                                                                                                     
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    42
+                                                                                                                                    
+                                    RETRACKING MODULE - SUPERELEMENT TYPE  100                                                      
+                                    THE STRUCTURE                                                                    SUB PAGE:    10
+ 
+ 
+ 
+      Results file name: ..\assembly\R100.SIU                                                                                       
+ 
+ 
+ 
+ SUPERELEMENT TYPE:   100 ACTUAL ELEMENT:     1                                                                                     
+ HAS BEEN STORED ON RESULT FILE                                                                                                     
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    43
+                                                                                                                                    
+                                        RETRACKING MODULE - GLOBAL DATA                                                             
+                                                                                                                     SUB PAGE:     1
+                                                                                                                                    
+  SUM OF GLOBAL LOADS AND MOMENTS                                                                                                   
+  *******************************                                                                                                   
+                                                                                                                                    
+                                                                                                                                    
+  LOADCASE (INDEX)        X             Y             Z            RX            RY            RZ                                   
+ 
+        1            9.0804E-27   -2.0086E-25   -8.0786E-01   -3.0295E+00    6.0589E+00   -3.3894E-24                               
+        2            0.0000E+00    0.0000E+00   -1.0000E-01   -3.7500E-01    7.5000E-01    0.0000E+00                               
+        3            0.0000E+00    0.0000E+00   -5.0000E-02   -1.8750E-01    3.7500E-01    0.0000E+00                               
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    44
+                                                                                                                                    
+                                        RETRACKING MODULE - GLOBAL DATA                                                             
+                                                                                                                     SUB PAGE:     2
+                                                                                                                                    
+  SUM OF REACTION FORCES AND MOMENTS                                                                                                
+  **********************************                                                                                                
+  GIVEN IN THE GLOBAL COORDINATE SYSTEM OF THE TOP LEVEL SUPERELEMENT                                                               
+                                                                                                                                    
+  LOADCASE (INDEX)        X             Y             Z            RX            RY            RZ                                   
+ 
+        1            8.3638E-14   -5.8287E-15    8.0786E-01    3.0295E+00   -6.0589E+00   -3.6287E-08                               
+        2            4.4992E-14   -4.5372E-15    1.0000E-01    3.7500E-01   -7.5000E-01   -2.9733E-09                               
+        3            2.5774E-15   -2.4747E-16    5.0000E-02    1.8750E-01   -3.7500E-01   -7.1693E-09                               
+
+ DATE: 27-APR-2018 TIME: 14:21:10   ***************  SESTRA  ***************                                             PAGE:    45
+                                                                                                                                    
+                                        RETRACKING MODULE - GLOBAL DATA                                                             
+                                                                                                                     SUB PAGE:     3
+                                                                                                                                    
+  DIFFERENCES BETWEEN SUMMED LOADS AND REACTION FORCES                                                                              
+  ****************************************************                                                                              
+  LARGER THAN   0.00E+00 FOR TRANSLATIONAL COMPONENTS AND LARGER THAN   0.00E+00 FOR ROTATIONAL COMPONENTS                          
+                                                                                                                                    
+  LOADCASE (INDEX)        X             Y             Z            RX            RY            RZ                                   
+ 
+        1            8.3638E-14   -5.8287E-15    1.7542E-14    1.5394E-08    4.2802E-08   -3.6287E-08                               
+        2            4.4992E-14   -4.5372E-15   -1.8846E-14    4.1778E-10    1.9161E-10   -2.9733E-09                               
+        3            2.5774E-15   -2.4747E-16    1.7506E-13   -8.2151E-09   -4.1083E-09   -7.1693E-09                               
+ 
+  TOTAL TIME CONSUMED IN SESTRA                    CPU TIME:      1.26  CLOCK TIME:      0.97  CHANNEL TIME:      0.00              

@@ -434,8 +434,8 @@ def general_parser(rec_name, rec, in_file, out_file):
         nrecs += 1
         rec_name, rec = in_file.skip_restofrecord(rec_name, rec)
 
-    print 'not implemented: {:<10} no. of records: {:>6}'.format(current_name,
-                                                                 nrecs)
+#    print 'not implemented: {:<10} no. of records: {:>6}'.format(current_name,
+#                                                                 nrecs)
 
     return rec_name, rec
 

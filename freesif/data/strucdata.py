@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (c) 2015 Audun Gravdal Johansen
+# Copyright (c) 2015-2018 Audun Gravdal Johansen
 """Classes to operate on SESAM structural data.
 """
 
@@ -541,6 +541,7 @@ class FirstLevelData(StrucData):
         # TODO:
         # sets, kind and disconnected are used everywhere, could it
         # optionally be set global defaults for these ?
+        # fs.set_defaults(sets=[...], kind='shell', disconnected=True)
         # Then at the beginning in the functions who have these parameters:
         # sets, kind, disconnected = self._get_global_defaults(
         #   sets, kind, disconnected)
@@ -757,7 +758,7 @@ class FirstLevelData(StrucData):
         return data
 
         # this function could also support 'kind':
-        # The purpose would be (for kind='all') to have same shape datasets
+        # The purpose would be (for kind=None (all)) to have same shape datasets
         # for both beam and shell results which then could be used with a single
         # dataset for nodes and elements. irrelevant element types would be
         # given zero or nan values.
@@ -836,6 +837,7 @@ class FirstLevelData(StrucData):
 
         # assume all elements have same (number of) components
 
+        # TODO
         # provide functions to operate on result data from get_element results?
         # freesif.calc.vonmises(arr, ...)
         # freesif.calc.principal(arr, ...)
