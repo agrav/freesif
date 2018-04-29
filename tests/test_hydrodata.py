@@ -12,9 +12,9 @@ class TestHydroData(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish HydroData instances and associated verification data
-        cls._data1 = fs.open_sif('../test_files/slowdrift_G1.SIF')
+        cls._data1 = fs.open_sif('files/hydro/slowdrift_G1.SIF')
         cls._data1_verified = np.load(
-            '../test_files/slowdrift_G1_verified_arrs.npz')
+            'files/hydro/slowdrift_G1_verified_arrs.npz')
 
     @classmethod
     def tearDownClass(cls):
