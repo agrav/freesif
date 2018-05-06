@@ -104,10 +104,10 @@ class File(object):
                 level = subgr._f_getattr('LEVEL')
                 key = gr._v_name + '/' + subgr._v_name
                 if level == 'INTERLEVEL':
-                    self._data[key] = InterLevelData(subgr, self, data)
+                    self._data[key] = InterLevelData(subgr, data)
 
                 elif level == 'FIRSTLEVEL':
-                    self._data[key] = FirstLevelData(subgr, self, data)
+                    self._data[key] = FirstLevelData(subgr, data)
 
         _open_files.add(self)
         self._isopen = True

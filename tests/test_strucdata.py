@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Test StrucData public methods
+"""Test StrucData public methods with varying data and arguments
 """
 
 import unittest
@@ -9,7 +9,7 @@ import freesif as fs
 
 
 class TestStrucDataCase01(unittest.TestCase):
-    """1st order triangular plate elements, element results
+    """1st order 3-node triangular plate elements, element results
     """
 
     @classmethod
@@ -45,7 +45,7 @@ class TestStrucDataCase01(unittest.TestCase):
 
 
 class TestStrucDataCase02(unittest.TestCase):
-    """1st order triangular plate elements, node results
+    """1st order 3-node triangular plate elements, node results
     """
 
     @classmethod
@@ -82,7 +82,7 @@ class TestStrucDataCase02(unittest.TestCase):
 
 
 class TestStrucDataCase03(unittest.TestCase):
-    """1st order beam elements, element results
+    """1st order 2-node beam elements, element results
     """
 
     @classmethod
@@ -116,6 +116,121 @@ class TestStrucDataCase03(unittest.TestCase):
         res = self._data.get_elementresults('beamforce', rescases=1, sets=self._sets)
         res_verified = self._gr_verified['beamforce']
         self.assertTrue(np.allclose(res, res_verified))
+
+
+class TestStrucDataCase04(unittest.TestCase):
+    """1st order 4-node quad plate elements, element results
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        # establish StrucData instances and associated verification data
+        cls._data = fs.open_sif('files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
+        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._gr_verified = cls._f_verified['test01_1stord_linstat_R1/MD_plates/elemres']
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._data.close()
+        cls._f_verified.close()
+
+    def test_get_nodes(self):
+        nodes = self._data.get_nodes(sets='MD_plates', kind='shell', disconnected=True)
+        nodes_verified = self._gr_verified['nodes']
+        self.assertTrue(np.allclose(nodes, nodes_verified))
+
+    def test_get_elements(self):
+        elems = self._data.get_elements(sets='MD_plates', kind='shell', disconnected=True)
+        connectivity = self._gr_verified['connectivity']
+        offset = self._gr_verified['offset']
+        eltyp = self._gr_verified['eltyp']
+        self.assertTrue(np.allclose(elems[0], connectivity))
+        self.assertTrue(np.allclose(elems[1], offset))
+        self.assertTrue(np.allclose(elems[2], eltyp))
+
+    def test_get_elementresults_generalstress(self):
+        res = self._data.get_elementresults('generalstress', rescases=1, sets='MD_plates')
+        res_verified = self._gr_verified['generalstress']
+        self.assertTrue(np.allclose(res, res_verified))
+
+
+class TestStrucDataCase05(unittest.TestCase):
+    """1st order 4-node quad plate elements, node results
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        # establish StrucData instances and associated verification data
+        cls._data = fs.open_sif('files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
+        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._gr_verified = cls._f_verified['test01_1stord_linstat_R1/MD_plates/noderes']
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._data.close()
+        cls._f_verified.close()
+
+    def test_get_nodes(self):
+        nodes = self._data.get_nodes(sets='MD_plates', kind='shell', disconnected=False)
+        nodes_verified = self._gr_verified['nodes']
+        self.assertTrue(np.allclose(nodes, nodes_verified))
+
+    def test_get_elements(self):
+        elems = self._data.get_elements(sets='MD_plates', kind='shell', disconnected=False)
+        connectivity = self._gr_verified['connectivity']
+        offset = self._gr_verified['offset']
+        eltyp = self._gr_verified['eltyp']
+        self.assertTrue(np.allclose(elems[0], connectivity))
+        self.assertTrue(np.allclose(elems[1], offset))
+        self.assertTrue(np.allclose(elems[2], eltyp))
+
+    def test_get_noderesults_displacement(self):
+        res = self._data.get_noderesults('displacement', rescases=1,
+                                         sets='MD_plates', disconnected=False)
+        res_verified = self._gr_verified['displacement']
+        self.assertTrue(np.allclose(res, res_verified))
+
+
+class TestStrucDataCase07(unittest.TestCase):
+    """2nd order 6-node triangular plate elements, element results
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        # establish StrucData instances and associated verification data
+        cls._data = fs.open_sif('files/struc/single_super_elem/test01_2ndord_linstat_R1.SIU')
+        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._gr_verified = cls._f_verified['test01_2ndord_linstat_R1/LD_plates/elemres']
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._data.close()
+        cls._f_verified.close()
+
+    def test_get_nodes(self):
+        nodes = self._data.get_nodes(sets='LD_plates', kind='shell', disconnected=True)
+        nodes_verified = self._gr_verified['nodes']
+        self.assertTrue(np.allclose(nodes, nodes_verified))
+
+    def test_get_elements(self):
+        elems = self._data.get_elements(sets='LD_plates', kind='shell', disconnected=True)
+        connectivity = self._gr_verified['connectivity']
+        offset = self._gr_verified['offset']
+        eltyp = self._gr_verified['eltyp']
+        self.assertTrue(np.allclose(elems[0], connectivity))
+        self.assertTrue(np.allclose(elems[1], offset))
+        self.assertTrue(np.allclose(elems[2], eltyp))
+
+    def test_get_elementresults_generalstress(self):
+        res = self._data.get_elementresults('generalstress', rescases=1, sets='LD_plates')
+        res_verified = self._gr_verified['generalstress']
+        self.assertTrue(np.allclose(res, res_verified))
+
+    def test_calc_principal_thickshell(self):
+        gs = self._data.get_elementresults('generalstress', rescases=1, sets='LD_plates')
+        ps = fs.calc.principal_thickshell(gs)
+        ps_verified = self._gr_verified['principalstress']
+        self.assertTrue(np.allclose(ps, ps_verified))
 
 
 if __name__ == '__main__':

@@ -296,6 +296,29 @@ class FirstLevelData(StrucData):
     idxtri = np.array([0, 4, 1, 5, 3, 7])
     idxquad = np.array([0, 5, 1, 6, 4, 9, 3, 8])
 
+    # transformation matrices for decomposision of stresses
+
+    # 1st order plates
+    x_decomp_thin = np.array([
+            [ 0.5,  0. ,  0. ,  0.5,  0. ,  0. ],
+            [ 0. ,  0.5,  0. ,  0. ,  0.5,  0. ],
+            [ 0. ,  0. ,  0.5,  0. ,  0. ,  0.5],
+            [-0.5,  0. ,  0. ,  0.5,  0. ,  0. ],
+            [ 0. , -0.5,  0. ,  0. ,  0.5,  0. ],
+            [ 0. ,  0. , -0.5,  0. ,  0. ,  0.5]])
+
+    # 2nd order shells
+    x_decomp_thick = np.array([
+            [ 0.5,  0. ,  0. ,  0. ,  0. ,  0.5,  0. ,  0. ,  0. ,  0. ],
+            [ 0. ,  0.5,  0. ,  0. ,  0. ,  0. ,  0.5,  0. ,  0. ,  0. ],
+            [ 0. ,  0. ,  0.5,  0. ,  0. ,  0. ,  0. ,  0.5,  0. ,  0. ],
+            [-0.5,  0. ,  0. ,  0. ,  0. ,  0.5,  0. ,  0. ,  0. ,  0. ],
+            [ 0. , -0.5,  0. ,  0. ,  0. ,  0. ,  0.5,  0. ,  0. ,  0. ],
+            [ 0. ,  0. , -0.5,  0. ,  0. ,  0. ,  0. ,  0.5,  0. ,  0. ],
+            [ 0. ,  0. ,  0. ,  1.5,  0. ,  0. ,  0. ,  0. ,  0. ,  0. ],
+            [ 0. ,  0. ,  0. ,  0. ,  1.5,  0. ,  0. ,  0. ,  0. ,  0. ]])
+
+
     def __init__(self, tbgroup, toplevel=None):
         super(FirstLevelData, self).__init__(tbgroup, toplevel)
         if self._filetype == 'R':
@@ -323,28 +346,51 @@ class FirstLevelData(StrucData):
     def _process_eltyp23(self, restype, pos, d):
         """BTSS, General Curved Beam (3-node)"""
         d.shape = (2, 6)
-        return np.dot(self.xbm3, d)
+        if pos == 'nodes':
+            return np.dot(self.xbm3, d)
+        return d
 
     def _process_eltyp24(self, restype, pos, d):
         """FQUS, Flat Quadrilateral Thin Shell (4-node)"""
-        return d.reshape(10, 3)[self.idxquad,:].reshape(4, 2, 3)
+        d = d.reshape(10, 3)[self.idxquad,:].reshape(4, 2, 3)
+        if restype == 'decomposedstress':
+            d = self._decompose_stresses_thin(d)  # shape is (4, 6)
+        return d
 
     def _process_eltyp25(self, restype, pos, d):
         """FTRS, Flat Triangular Thin Shell (3-node)"""
-        return d.reshape(8, 3)[self.idxtri,:].reshape(3, 2, 3)
+        d = d.reshape(8, 3)[self.idxtri,:].reshape(3, 2, 3)
+        if restype == 'decomposedstress':
+            d = self._decompose_stresses_thin(d)  # shape is (4, 6)
+        return d
 
     def _process_eltyp26(self, restype, pos, d):
         """SCTS, Subparametric Curved Triangular Thick Shell (6-node)"""
-        d.shape = (2, 3, 5)
-        d = self._extrapolate_to_surface(d)
-        return np.dot(self.xtri, d)  # shape is (6, 2, 5)
+        d.shape = (2, 3, 5)  # (side, respt, comp)
+        if pos == 'respts':
+            return np.rollaxis(d, 1)
+        elif pos == 'nodes':
+            d[...,:3] = self._extrapolate_to_surface(d[...,:3])
+            if restype == 'generalstress':
+                d[...,3:] = 0.
+            elif restype == 'decomposedstress':
+                d = self._decompose_stresses_thick(d)  # shape is (4, 8)
+            # extrapolate to nodes:
+            return np.dot(self.xtri, d)  # shape is (6, 2, 5)
 
     def _process_eltyp28(self, restype, pos, d):
         """SCQS, Subparametric Curved Quadrilateral Thick Shell (8-node)"""
         d.shape = (2, 4, 5)  # (side, respt, comp)
-        d = self._extrapolate_to_surface(d)
-        # extrapolate to nodes:
-        return np.dot(self.xquad, d)  # shape is (8, 2, 5)
+        if pos == 'respts':
+            return np.rollaxis(d, 1)
+        elif pos == 'nodes':
+            d[...,:3] = self._extrapolate_to_surface(d[...,:3])
+            if restype == 'generalstress':
+                d[...,3:] = 0.
+            elif restype == 'decomposedstress':
+                d = self._decompose_stresses_thick(d)  # shape is (4, 8)
+            # extrapolate to nodes:
+            return np.dot(self.xquad, d)  # shape is (8, 2, 5)
 
     def _extrapolate_to_surface(self, d):
         lp, up = d[0], d[1]
@@ -353,8 +399,12 @@ class FirstLevelData(StrucData):
         us = lp + (1 + a) / (2*a) * (up - lp)
         return np.array((ls, us))
 
-    def _decompose_stresses(self, resarr):
-        pass
+    def _decompose_stresses_thick(self, d):
+        return np.dot(self.x_decomp_thick, np.rollaxis(d,1).reshape(-1,10).T).T
+
+    def _decompose_stresses_thin(self, d):
+        return np.dot(self.x_decomp_thin, d.reshape(-1,6).T).T
+
 
     def get_nodes(self, sets=None, kind=None, disconnected=False, trans=None,
                   index=1):
@@ -660,7 +710,7 @@ class FirstLevelData(StrucData):
         restype : str
             'beamforce', 'generalstress' or 'decomposedstress'
         pos : str
-            'nodes' (default), 'gauss' or 'average'
+            'nodes' (default) or 'respts' (not supported yet)
         run : int
             Analysis run number (default is 1)
         rescases : int, sequence or None
@@ -676,7 +726,7 @@ class FirstLevelData(StrucData):
             of the different types.
 
         Result type: Beam Force
-        ---------------------------
+        -----------------------
         ...
 
         ===== ===== ========== ==========================================
@@ -743,17 +793,12 @@ class FirstLevelData(StrucData):
 
         # reshape
         if len(ires) > 1:
-            if restype in ('generalstress', 'decomposedstress'):
+            if restype == 'generalstress':
                 ncomps = data.shape[2]
                 data.shape = (len(ires), -1, 2, ncomps)
             else:
                 ncomps = data.shape[1]
                 data.shape = (len(ires), -1, ncomps)
-
-
-        # decompose
-        # if restype = 'decomposedstress':
-        #     ...
 
         return data
 
@@ -828,7 +873,7 @@ class FirstLevelData(StrucData):
 
         # pos:
         #   node (default)
-        #   gauss
+        #   respt
         #   average
 
         # layer: (consider returning both?)

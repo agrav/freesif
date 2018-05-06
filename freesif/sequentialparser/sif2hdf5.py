@@ -190,7 +190,7 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
     letter = groupdict['letter']
     extension = groupdict['ext']
 
-    if extension.upper() == '.SIN':
+    if extension.upper() == 'SIN':
         raise ValueError('.SIN files not supported. Convert to .SIU')
 
     # reset in case several files are read in the same session
@@ -254,13 +254,13 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
         # generate candidate file names
         fnames = []
         ihref = []
-        if extension in ('.SIF', '.SIU'):  # structural results files
+        if extension in ('SIF', 'SIU'):  # structural results files
             for r in hierarch_table[1:]:
                 if r['islevl'] == 1:  # 1st level
                     fnames.append(fileprefix +
                                   'R' + str(r['iselty']) +
                                   'H' + str(r['ihref']) +
-                                  extension)
+                                  '.' + extension)
                     ihref.append(r['ihref'])
 
         else:  # structural input files
@@ -268,7 +268,7 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
                 if r['indsel'] == 1:  # skip additional repetitions
                     fnames.append(fileprefix +
                                   'T' + str(r['iselty']) +
-                                  extension)
+                                  '.' + extension)
                     ihref.append(r['ihref'])
 
             # TODO: look for load files as well ? (L-files)
@@ -277,11 +277,12 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
 
         # read files
         for i, fname in enumerate(fnames):
-            if path.isfile(fdir + '\\' + fname):
+            fname_fullpath = path.join(fdir, fname)
+            if path.isfile(fname_fullpath):
                 if is_formatted:
-                    in_file = FormattedFile(fname)
+                    in_file = FormattedFile(fname_fullpath)
                 else:
-                    in_file = UnformattedFile(fname)
+                    in_file = UnformattedFile(fname_fullpath)
 
                 parsers.reset(reset_toplevel=False)
                 parsers.set_current_ihref(ihref[i])
