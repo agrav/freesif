@@ -68,7 +68,7 @@ class VtuWriter(object):
     ::
 
         import freesif as fs
-        f = fs.open_hdf5('T1.h5')
+        f = fs.open_hdf5('R1.h5')
         t1 = f['T1']
         nodes = t1.get_nodes()
         elems = t1.get_elements()
@@ -79,16 +79,9 @@ class VtuWriter(object):
         vtu.start_pointdata()
         vtu.add_data(disp, 'displacement')
         vtu.close()
+        f.close()
 
     """
-
-
-    # notes
-    # -----
-    #
-    # Necessary to have beam and shell data in separate pieces for
-    # element results? probably..
-    #   should this be handled in the API, e.g. get_results(only='beams') YES
 
     def __init__(self, filename, format='binary'):
         """
