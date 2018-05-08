@@ -710,7 +710,8 @@ class FirstLevelData(StrucData):
         restype : str
             'beamforce', 'generalstress' or 'decomposedstress'
         pos : str
-            'nodes' (default) or 'respts' (not supported yet)
+            'nodes' (default), 'respts' (not supported yet) or average
+            (not supported yet)
         run : int
             Analysis run number (default is 1)
         rescases : int, sequence or None
