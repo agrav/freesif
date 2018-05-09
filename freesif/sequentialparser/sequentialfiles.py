@@ -4,6 +4,8 @@
 files.
 """
 
+from __future__ import division
+
 import struct
 from math import ceil
 
@@ -82,9 +84,9 @@ class SequentialFile(file):
 
         # workaround to handle TDxxxxxx records (on unformatted files):
         if rec_name[:2] == 'TD':
-            for i in range(int(rec[2]) / 100):
+            for i in range(int(rec[2]) // 100):
                 self.read_stringrec()
-            for i in range(int(rec[3]) / 100):
+            for i in range(int(rec[3]) // 100):
                 self.read_stringrec()
             return self.read_headerrec()
 
@@ -151,7 +153,7 @@ class UnformattedFile(SequentialFile):
         return rec
 
     def tofloatrec(self, stringrec):
-        return struct.unpack('{}f'.format(len(stringrec)/4), stringrec)
+        return struct.unpack('{}f'.format(len(stringrec)//4), stringrec)
 
     def read_floatrec(self, skipfirst=0):
         return self.tofloatrec(self.read_stringrec()[skipfirst:])
@@ -325,7 +327,7 @@ class FormattedFile(SequentialFile):
                 return
 
         n_floats = len(floats[fpl:])
-        n_lines = n_floats / 4
+        n_lines = n_floats // 4
         n_rest = n_floats % 4
         if n_rest:
             n_lines += 1

@@ -3,6 +3,8 @@
 """Classes to operate on SESAM structural data.
 """
 
+from __future__ import division
+
 import numpy as np
 from .sifdata import SifData
 from .helpers import getrow

@@ -7,8 +7,11 @@
 # class. with all record defititions (readers, descriptors, atoms) imported
 # from a separate module.
 
+from __future__ import division
+
 import numpy as np
 import tables as tb
+
 
 # ---Global variables-------------------------------------------------------- #
 # some global variables are updated from reader functions when necessary
@@ -710,11 +713,11 @@ def td_reader(rec_name, rec, in_file, out_file):
         codtxt = int(rec[3])
 
         name = ''
-        for _ in range(codnam / 100):
+        for _ in range(codnam // 100):
             name += in_file.read_stringrec().strip()
 
         text = []
-        for _ in range(codtxt / 100):
+        for _ in range(codtxt // 100):
             text.append(in_file.read_stringrec().strip())
 
 
@@ -1658,8 +1661,8 @@ def rdpoints_reader(rec_name, rec, in_file, out_file):
         nsptra = int(rec[7])
         nlay = int(rec[8])
 
-        nok = ijkdim / 10000
-        noj = np.mod(ijkdim, 10000) / 100
+        nok = ijkdim // 10000
+        noj = np.mod(ijkdim, 10000) // 100
         noi = np.mod(ijkdim, 100)
 
         # store nlay, nok, noj, noi for later use
@@ -1898,7 +1901,7 @@ def rvnodres_reader(rec_name, rec, in_file, out_file):
         nfield = int(rec[0])
         ires = int(rec[1])
         icompl = rdresref_data[ires]
-        nres = (nfield - 5) / (icompl + 1)
+        nres = (nfield - 5) // (icompl + 1)
 
         res.add(in_file.read_floats(nres))
         recs.add(rec)

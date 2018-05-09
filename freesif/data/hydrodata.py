@@ -3,10 +3,13 @@
 """Defines class to operate on SESAM hydrodynamic data.
 """
 
+from __future__ import division
+
 import numpy as np
 from .sifdata import SifData
 from .helpers import getrow
 from ..exceptions import ResultError, NoSuchRecordError
+
 
 class HydroData(SifData):
     """Class to operate on SESAM hydrodynamic data.

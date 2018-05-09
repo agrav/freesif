@@ -5,6 +5,8 @@ Created on Mon Apr 30 20:24:59 2018
 @author: audun
 """
 
+from __future__ import division
+
 import numpy as np
 
 
