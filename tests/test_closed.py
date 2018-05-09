@@ -25,6 +25,14 @@ hydrodata_methods_and_args = [('get_addedmass', ()),
                               ('get_meandrift', ()),
                               ('get_horiz_meandrift', ())]
 
+strucdata_methods_and_args = [('get_setnames', ()),
+                              ('get_nodes', ()),
+                              ('get_nodenumbers', ()),
+                              ('get_noderesults', ('displacement',)),
+                              ('get_elements', ()),
+                              ('get_elementnumbers', ()),
+                              ('get_elementresults', ('generalstress',))]
+
 file_methods_and_args = [('__contains__', ('key',)),
                          ('__getitem__', ('key',)),
                          ('__iter__', ()),
@@ -42,18 +50,32 @@ class TestHydroData(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish a closed HydroData instance
-        cls._data = fs.open_sif('../test_files/slowdrift_G1.SIF')
+        cls._data = fs.open_sif('./files/hydro/slowdrift_G1.SIF')
         cls._data.close()
-
-#    def setUp(self):
-#
-#        # establish a closed HydroData instance
-#        self._data = fs.open_sif('../test_files/slowdrift_G1.SIF')
-#        self._data.close()
 
     def test_methods(self):
         # all methods should raise ClosedFileError
         for method, args in hydrodata_methods_and_args:
+            self.assertRaises(fs.exceptions.ClosedFileError,
+                              getattr(self._data, method),
+                              *args)
+
+    def test_close(self):
+        # calling close() on an already closed SifData should return None
+        self.assertIsNone(self._data.close())
+
+
+class TestStrucData(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        # establish a closed StrucData instance (single sup. elem.)
+        cls._data = fs.open_sif('./files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
+        cls._data.close()
+
+    def test_methods(self):
+        # all methods should raise ClosedFileError
+        for method, args in strucdata_methods_and_args:
             self.assertRaises(fs.exceptions.ClosedFileError,
                               getattr(self._data, method),
                               *args)
@@ -71,11 +93,6 @@ class TestFile(unittest.TestCase):
         # establish a closed File instance
         cls._file = fs.open_hdf5('../test_files/slowdrift_G1.h5')
         cls._file.close()
-
-#    def setUp(self):
-#        # establish a closed File instance
-#        self._file = fs.open_hdf5('../test_files/slowdrift_G1.h5')
-#        self._file.close()
 
     def test_methods(self):
         # all methods should raise ClosedFileError
