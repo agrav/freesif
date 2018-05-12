@@ -3,9 +3,10 @@
 """Base class for all data classes.
 """
 
+from builtins import object
 import tables as tb
 import numpy as np
-from itertools import izip
+
 from ..sequentialparser.parsers import atoms
 from ..exceptions import NoSuchRecordError, ClosedFileError
 
@@ -101,7 +102,7 @@ class SifData(object):
         datalist = []
         offsetlist = []
         offset = 0
-        for start, stop in izip(start_indices, stop_indices):
+        for start, stop in zip(start_indices, stop_indices):
             datalist.append(arr[start:stop])
             offset += stop - start
             offsetlist.append(offset)

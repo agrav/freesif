@@ -2,7 +2,10 @@
 # Copyright (c) 2015 Audun Gravdal Johansen
 """Convert SESAM Interface files into HDF5 format.
 """
+from __future__ import print_function
 
+#from builtins import zip
+#from builtins import str
 from os import path
 import tables as tb
 import re
@@ -142,7 +145,7 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
     """
 
     # handle a sequence of file names
-    if not isinstance(sifname, (str, unicode)):
+    if not isinstance(sifname, str):
         if not isinstance(sifname, (list, tuple)):
             raise TypeError('sifname must be a file name (str) or sequence '
                              'of file names')
@@ -153,7 +156,7 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
         if not prefix:
             prefix = ['' for _ in sifname]
 
-        elif isinstance(prefix, (str, unicode)):
+        elif isinstance(prefix, str):
             prefix = [prefix for _ in sifname]
 
         if hdf5name:
@@ -210,10 +213,11 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
         hdf5name = fname[:-3] + 'h5'
 
     # determine formatting
-    if open(sifname).read(1) == 'K':  # file is unformatted
-        is_formatted = False
-    else:
-        is_formatted = True
+    with open(sifname, 'rb') as f:
+        if f.read(1) == b'K':  # file is unformatted
+            is_formatted = False
+        else:
+            is_formatted = True
 
     # open files
     if is_formatted:
@@ -290,10 +294,13 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
                 in_file.close()
 
             else:
-                print 'file not found: ' + fname
+                print('file not found: ' + fname)
 
     if in_memory:
         # TODO: is it possible to change mode to 'r' here ?
         return out_file
 
     out_file.close()
+
+    # return hdf5 file name (full path)
+    return path.abspath(hdf5name)

@@ -3,7 +3,7 @@
 """
 
 import numpy as np
-from itertools import count, izip
+from itertools import count
 from collections import OrderedDict
 from ..exceptions import VtfError
 
@@ -457,7 +457,7 @@ class VtfData(object):
             elem_ids[et] = []
 
         o0 = 0
-        for o1, et in izip(offset, eltyp):
+        for o1, et in zip(offset, eltyp):
             elems_dict[et].append(con[o0:o1])
             o0 = o1
 
@@ -469,7 +469,7 @@ class VtfData(object):
 
         if has_elem_numbers:
             o0 = 0
-            for elno, o1, et in izip(elem_numbers, offset, eltyp):
+            for elno, o1, et in zip(elem_numbers, offset, eltyp):
                 elem_ids[et].append(elno)
                 o0 = o1
 
@@ -583,7 +583,7 @@ class VtfData(object):
             if nodes_data.with_id:
                 f_out.write('%WITH_ID\n')
                 string ='{:<8.0f}' +  3*'{:>12.5f}' + '\n'
-                for nodeid, coords in izip(nodes_data.nodeid_arr,
+                for nodeid, coords in zip(nodes_data.nodeid_arr,
                                           nodes_data.nodes_arr):
                     f_out.write(string.format(nodeid, *coords))
             else:
@@ -641,7 +641,7 @@ class VtfData(object):
 
             # write element defs in correct order
             if elems_data.with_id:
-                for elem_ids_arr, (elem_type, elems_arr) in izip(
+                for elem_ids_arr, (elem_type, elems_arr) in zip(
                     elems_data.elem_ids.itervalues(),
                     ordered_elems_dict.iteritems()):
                     # element type:
@@ -650,7 +650,7 @@ class VtfData(object):
                     # write elements
                     nnodes = elems_arr.shape[1]
                     string = (1 + nnodes)*'{:<10}' + '\n'
-                    for elem_id, node_refs in izip(elem_ids_arr, elems_arr):
+                    for elem_id, node_refs in zip(elem_ids_arr, elems_arr):
                         f_out.write(string.format(elem_id, *node_refs))
             else:
                 for elem_type, elems_arr in ordered_elems_dict.iteritems():

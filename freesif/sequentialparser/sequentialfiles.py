@@ -6,11 +6,14 @@ files.
 
 from __future__ import division
 
+from builtins import range
+from builtins import object
 import struct
 from math import ceil
+import io
 
 # Set with allowable record names
-allowed_record_names = set([
+allowed_record_names_str = set([
 'DATE', 'IDENT', 'IEND', 'TDMATER', 'TDSECT', 'TDSETNAM', 'TDSUPNAM',
 'TEXT', 'TSLAYER', 'ACFD', 'ADDATA', 'BEISTE', 'BELFIX', 'BELLAX',
 'BELLO2', 'BELOAD1', 'BEDRAG1', 'BEMASS1', 'BEUSLO', 'BEUVLO', 'BEWAKIN',
@@ -42,8 +45,40 @@ allowed_record_names = set([
 'SCONMESH', 'SCONPLIS', 'SPROSELE', 'SPROMATR', 'SPROSEGM', 'SPROHYDR',
 'SPROCODE', 'SPROORIE', 'SPROECCE', 'SPROPILE', 'SPROSOIL', 'IRECSIZE'])
 
+allowed_record_names_b = set([
+b'DATE', b'IDENT', b'IEND', b'TDMATER', b'TDSECT', b'TDSETNAM', b'TDSUPNAM',
+b'TEXT', b'TSLAYER', b'ACFD', b'ADDATA', b'BEISTE', b'BELFIX', b'BELLAX',
+b'BELLO2', b'BELOAD1', b'BEDRAG1', b'BEMASS1', b'BEUSLO', b'BEUVLO', b'BEWAKIN',
+b'BEWALO1', b'BGRAV', b'BLDEP', b'BLDEP', b'BNACCLO', b'BNBCD', b'BNDISPL',
+b'BNDOF', b'BNINCO', b'BNLOAD', b'BNLOAX', b'BNMASS', b'BNTEMP', b'BNTRCOS',
+b'BNWALO', b'BRIGAC', b'BRIGDI', b'BRIGVE', b'BQDP', b'GBARM', b'GBEAMG',
+b'GBOX', b'GCHAN', b'GCHANR', b'GCOORD', b'GCROINT', b'GDOBO', b'GECC',
+b'GECCEN', b'GELINT', b'GELMNT1', b'GELREF1', b'GELSTRP', b'GELTH', b'GIORH',
+b'GIORHR', b'GLMASS', b'GLSEC', b'GLSECR', b'GNODE', b'GPIPE', b'GSEPSPEC',
+b'GSETMEMB', b'GSLAYER', b'GSLPLATE', b'GSLSTIFF', b'GTONP', b'GUNIVEC', b'GUSYI',
+b'MAXDMP', b'MAXSPR', b'MCNT', b'MGDAMP', b'MGLDAMP', b'MGLMASS', b'MGMASS',
+b'MGSPRNG', b'MISOAL', b'MISOEML', b'MISOHL', b'MISOHNL', b'MISOPL', b'MISOPL',
+b'MISOPL', b'MISOSEL', b'MISTEL', b'MORSMEL', b'MORSSEL', b'MORSSOL', b'MSHGLSP',
+b'MTEMP', b'MTENONL', b'MTRMEL', b'MTRSEL', b'MTRSOL', b'ADDATA', b'AMATRIX',
+b'AMDACCL', b'AMDDAMP', b'AMDDISP', b'AMDFREQ', b'AMDLOAD', b'AMDMASS', b'AMDSTIFF',
+b'AMDVELO', b'BLDEP', b'BNBCD', b'BNDISPL', b'BNDOF', b'BNINCO', b'BNLOAD',
+b'BNMASS', b'BNTRCOS', b'BQDP', b'BSELL', b'GCOORD', b'GELMNT1', b'GELMNT2',
+b'GELREF1', b'GNODE', b'HIERARCH', b'HSUPSTAT', b'HSUPTRAN', b'MAXDMP', b'MAXSPR',
+b'MGDAMP', b'MGSPRNG', b'RBLODCMB', b'RDELNFOR', b'RDFORCES', b'RDIELCOR',
+b'RDMLFACT', b'RDNODBOC', b'RDNODREA', b'RDNODRES', b'RDPOINTS', b'RDRESCMB',
+b'RDRESREF', b'RDSERIES', b'RDSTRAIN', b'RDSTRESS', b'RDTRANS', b'RSUMLOAD',
+b'RSUMMASS', b'RSUMREAC', b'RSUPTRAN', b'RVABSCIS', b'RVELNFOR', b'RVFORCES',
+b'RVNODACC', b'RVNODDIS', b'RVNODVEL', b'RVNODREA', b'RVORDINA', b'RVSTRAIN',
+b'RVSTRESS', b'TNODE', b'TELEMENT', b'TDRESREF', b'TDSERIES', b'TDSUPNAM',
+b'W1EXFORC', b'W1MATRIX', b'WIMOTION','WISFORCE', b'W2EXFDIF', b'W2EXFSUM',
+b'W2FLUDIF', b'W2FLUSUM', b'W2HDRIFT', b'W2MDRIFI', b'WBODCON', b'WBODY', b'WDRESREF',
+b'WFKPOINT', b'WFLUIDKN', b'WGLOBDEF', b'WGRESPON', b'WSCATTER', b'WSECTION',
+b'WSURFACE', b'TDBODNAM', b'TDRSNAM', b'TDSCATTER', b'TDSCONC', b'SCONCEPT',
+b'SCONMESH', b'SCONPLIS', b'SPROSELE', b'SPROMATR', b'SPROSEGM', b'SPROHYDR',
+b'SPROCODE', b'SPROORIE', b'SPROECCE', b'SPROPILE', b'SPROSOIL', b'IRECSIZE'])
 
-class SequentialFile(file):
+
+class SequentialFile(object):
     """Base class for FormattedFile and UnformattedFile
     """
     # methods that need to be implemented in derived classes:
@@ -54,6 +89,9 @@ class SequentialFile(file):
     # read_headerrec(self):
     # read_floats(self, n, skipfirst=0):
     # at_headerrec(self):
+
+    def __init__(self, name, mode='r'):
+        self.f = io.open(name, mode)
 
     # common method implementations:
     def skip_restofrecord(self, rec_name, rec):
@@ -91,20 +129,20 @@ class SequentialFile(file):
             return self.read_headerrec()
 
         #read first record
-        pos = self.tell()  # current position in in_file
+        pos = self.f.tell()  # current position in in_file
         string_rec = self.read_stringrec()
 
-        if string_rec[:8] == '        ':  # type 1 cont. record
-            while string_rec[:8] == '        ':  # read cont. recs
+        if string_rec[:8] == b'        ':  # type 1 cont. record
+            while string_rec[:8] == b'        ':  # read cont. recs
                 string_rec = self.read_stringrec()
-            return string_rec[:8].strip(), self.tofloatrec(string_rec[8:])
+            return string_rec[:8].decode().strip(), self.tofloatrec(string_rec[8:])
 
-        elif string_rec[:8].strip() in allowed_record_names: # no cont. records
-            return string_rec[:8].strip(), self.tofloatrec(string_rec[8:])
+        elif string_rec[:8].strip() in self.allowed_record_names: # no cont. records
+            return string_rec[:8].decode().strip(), self.tofloatrec(string_rec[8:])
 
         else:  # type 2 record
             nfloats = int(rec[0]) - 4  # nfield - 4
-            self.seek(pos)  # rewind
+            self.f.seek(pos)  # rewind
             self.read_floats(nfloats)  # read remainder of record
             return self.read_headerrec()
 
@@ -121,35 +159,35 @@ class SequentialFile(file):
             # next header record
             rec_name, rec = self.skip_restofrecord(rec_name, rec)
 
-            if recs.has_key(rec_name):
+            if rec_name in recs:
                 recs[rec_name] += 1
             else:
                 recs[rec_name] = 1
         return recs
 
+    def close(self):
+        self.f.close()
 
 
 class UnformattedFile(SequentialFile):
 
     def __init__(self, fname, mode='r'):
-
-        file.__init__(self, fname, mode+'b')
-
+        super(UnformattedFile, self).__init__(fname, mode+'b')
         if mode == 'r':
-            self.seek(1)  # skip 1st byte (the 'K')
-
+            self.f.seek(1)  # skip 1st byte (the 'K')
         elif mode == 'w':
-            self.write('K')  # write mandatory(?) 1st byte
+            self.f.write(b'K')  # write mandatory(?) 1st byte
+        self.allowed_record_names = allowed_record_names_b
 
     def read_stringrec(self):
 
         self.hasrest = False
 
-        rlen = struct.unpack('B', self.read(1))[0]
+        rlen = struct.unpack('B', self.f.read(1))[0]
         if rlen == 129:
             rlen = 128
-        rec = self.read(rlen)
-        self.read(1)
+        rec = self.f.read(rlen)
+        self.f.read(1)
         return rec
 
     def tofloatrec(self, stringrec):
@@ -160,7 +198,7 @@ class UnformattedFile(SequentialFile):
 
     def read_headerrec(self):
         stringrec = self.read_stringrec()
-        return stringrec[:8].strip(), self.tofloatrec(stringrec[8:])
+        return stringrec[:8].decode().strip(), self.tofloatrec(stringrec[8:])
 
     def read_floats(self, n, skipfirst=0):
         """returns tuple of n floats"""
@@ -201,11 +239,11 @@ class UnformattedFile(SequentialFile):
         """check if current pos in file is at start of a header record.
         """
 
-        pos = self.tell()
-        rec_name = self.read(9)[1:].strip()
-        self.seek(pos)
+        pos = self.f.tell()
+        rec_name = self.f.read(9)[1:].strip().decode()
+        self.f.seek(pos)
 
-        if not self.hasrest and rec_name in allowed_record_names:
+        if not self.hasrest and rec_name in self.allowed_record_names:
             return True
 
         return False
@@ -215,15 +253,16 @@ class FormattedFile(SequentialFile):
 
     def __init__(self, fname, mode='r'):
 
-        file.__init__(self, fname, mode)
-
+        super(FormattedFile, self).__init__(fname, mode)
         # remaining float places on current record (used for write mode)
         self.float_places_left = 0
+        self.allowed_record_names = allowed_record_names_str
+
 
     def read_stringrec(self):
         self.hasrest = False
 
-        return self.readline()[:-1]  # skip the newline character
+        return self.f.readline()[:-1]  # skip the newline character
 
     def tofloatrec(self, stringrec):
         return tuple([float(stringrec[i:i+16])
@@ -260,7 +299,7 @@ class FormattedFile(SequentialFile):
             nrecs = int(ceil(floats_to_read/4.))
             floats = ()
 
-            for _ in xrange(nrecs):
+            for _ in range(nrecs):
                 floats += self.read_floatrec(skipfirst)
 
             floats = floatrest + floats
@@ -279,11 +318,11 @@ class FormattedFile(SequentialFile):
         """check if current pos in file is at start of a header record.
         """
 
-        pos = self.tell()
-        rec_name = self.read(8).strip()
-        self.seek(pos)
+        pos = self.f.tell()
+        rec_name = self.f.read(8).strip()
+        self.f.seek(pos)
 
-        if not self.hasrest and rec_name in allowed_record_names:
+        if not self.hasrest and rec_name in self.allowed_record_names:
             return True
 
         return False
@@ -292,21 +331,21 @@ class FormattedFile(SequentialFile):
         if self.float_places_left:
             # fill with blanks:
             # self.write(' '*self.float_places_left*16 + '\n')
-            self.write('\n')
+            self.f.write('\n')
 
         self.write('{:<8}'.format(header))
         for f in rec:
-            self.write('{:>16.8e}'.format(f))
+            self.f.write('{:>16.8e}'.format(f))
 
         self.float_places_left = 4 - len(rec)
         if not self.float_places_left:
-            self.write('\n')
+            self.f.write('\n')
 
     def write_string(self, string, leading_blanks=8):
         if self.float_places_left:
-            self.write('\n')
+            self.f.write('\n')
 
-        self.write(' '*leading_blanks + string + '\n')
+        self.f.write(' '*leading_blanks + string + '\n')
 
     def write_floats(self, floats):
         if len(floats) == 0:
@@ -316,14 +355,14 @@ class FormattedFile(SequentialFile):
 
         if fpl:  # places left on current line
             for f in floats[:fpl]:
-                self.write('{:>16.8e}'.format(f))
+                self.f.write('{:>16.8e}'.format(f))
 
             if fpl > len(floats):  # still float places left?
                 self.float_places_left = fpl - len(floats)
                 return
             elif fpl == len(floats):
                 self.float_places_left = 0
-                self.write('\n')
+                self.f.write('\n')
                 return
 
         n_floats = len(floats[fpl:])
@@ -339,6 +378,6 @@ class FormattedFile(SequentialFile):
         # finally, update self.float_places_left
         # self.float_places_left = 4 - n_rest if n_rest else 0
 
-    def writeRecord(self, rec_name, rec):
+    def write_record(self, rec_name, rec):
         self._write_line(rec_name, rec[:4])
         self.write_floats(rec[4:])

@@ -2,7 +2,7 @@
 # Copyright (c) 2015 Audun Gravdal Johansen
 """
 """
-from itertools import izip
+
 import numpy as np
 from os import path
 import re
@@ -22,7 +22,7 @@ def getvldata(arr, start_indices, stop_indices):
     """
     """
     data = []
-    for start, stop in izip(start_indices, stop_indices):
+    for start, stop in zip(start_indices, stop_indices):
         data.append(arr[start:stop])
     return np.concatenate(data)
 

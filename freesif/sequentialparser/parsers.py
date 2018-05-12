@@ -714,7 +714,11 @@ def td_reader(rec_name, rec, in_file, out_file):
 
         name = ''
         for _ in range(codnam // 100):
-            name += in_file.read_stringrec().strip()
+            add = in_file.read_stringrec().strip()
+            if isinstance(add, str):
+                name += add
+            else:
+                name += add.decode()
 
         text = []
         for _ in range(codtxt // 100):
@@ -2410,13 +2414,13 @@ def WSURFACE_reader(rec_name, rec, in_file, out_file):
         zelev_recs = []
         for start in range(0, nfloats_tot, nfloats_per):
             fl_it = iter(all_floats[start:start + nfloats_per])
-            zelev_rec = (fl_it.next(),)
+            zelev_rec = (next(fl_it),)
             for comp in rec[5:]:
                 if comp:
                     if rec[4]:
-                        zelev_rec += (complex(fl_it.next(), fl_it.next()),)
+                        zelev_rec += (complex(next(fl_it), next(fl_it)),)
                     else:
-                        zelev_rec += (fl_it.next(),)
+                        zelev_rec += (next(fl_it),)
                 else:
                     zelev_rec += (0.,)
             zelev_recs.append(zelev_rec)

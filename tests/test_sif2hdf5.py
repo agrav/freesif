@@ -8,9 +8,11 @@ import os
 
 
 class TestSIF2HDF5(unittest.TestCase):
-    """Test sif2hdf5 function for different filetypes. It is only checked that
-    the correct file is created, content on the file is not verified. Content
-    is verified in the HydroData and StrucData tests.
+    """Test *sif2hdf5* function for different filetypes. It is only checked that
+    the correct file is created, that it opens with the *open_hdf5* function and
+    that the type and number of records on the file is correct. The actual data
+    on the files is not verified, this is done in the HydroData and StrucData
+    tests.
     """
 
     @classmethod
@@ -62,6 +64,29 @@ class TestSIF2HDF5(unittest.TestCase):
     def test_SIF_hydro(self):
         fs.sif2hdf5(self._in_files['sif_hydro'], hdf5name=self._out_files['sif_hydro'])
         self.assertTrue(os.path.isfile(self._out_files['sif_hydro']))
+
+        # TODO: check that type/number of records on h5 file is correct inside
+        # the following methods
+
+    def test_open_SIU_single(self):
+        f = fs.open_hdf5(self._out_files['siu_single'])
+        f.close()
+
+    def test_open_SIU_assembly(self):
+        f = fs.open_hdf5(self._out_files['siu_assembly'])
+        f.close()
+
+    def test_open_FEM_single(self):
+        f = fs.open_hdf5(self._out_files['fem_single'])
+        f.close()
+
+    def test_open_FEM_assembly(self):
+        f = fs.open_hdf5(self._out_files['fem_assembly'])
+        f.close()
+
+    def test_open_SIF_hydro(self):
+        f = fs.open_hdf5(self._out_files['sif_hydro'])
+        f.close()
 
 
 if __name__ == '__main__':

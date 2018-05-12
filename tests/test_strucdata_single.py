@@ -8,6 +8,8 @@ import numpy as np
 import h5py
 import freesif as fs
 
+# TODO: use pytables instead of h5py for the verified data to avoid dependency
+#       on h5py
 
 class TestStrucDataCase01(unittest.TestCase):
     """1st order 3-node triangular plate elements, element results

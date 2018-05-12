@@ -2,6 +2,7 @@
 """Test that closed File and SifData instances behave as expected.
 """
 
+import os
 import unittest
 import freesif as fs
 
@@ -91,8 +92,13 @@ class TestFile(unittest.TestCase):
     def setUpClass(cls):
 
         # establish a closed File instance
-        cls._file = fs.open_hdf5('../test_files/slowdrift_G1.h5')
+        cls._fname = fs.sif2hdf5('./files/hydro/slowdrift_G1.SIF')
+        cls._file = fs.open_hdf5(cls._fname)
         cls._file.close()
+
+    @classmethod
+    def tearDownClass(cls):
+        os.remove(cls._fname)
 
     def test_methods(self):
         # all methods should raise ClosedFileError
@@ -104,6 +110,7 @@ class TestFile(unittest.TestCase):
     def test_close(self):
         # calling close() on an already closed File should return None
         self.assertIsNone(self._file.close())
+
 
 if __name__ == '__main__':
     unittest.main()

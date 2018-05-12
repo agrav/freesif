@@ -41,7 +41,7 @@ class StrucData(SifData):
         setnames = (setnames,) if isinstance(setnames, str) else setnames
         setmembs = []
         for setname in setnames:
-            cond = 'name=={}'.format(repr(setname))
+            cond = 'name==b{}'.format(repr(setname))
             isref = getrow(tdsetnam, cond)['idno']
             cond = '(isref=={})&(istype=={})'.format(isref, istype)
             for r in gsetmemb.where(cond):

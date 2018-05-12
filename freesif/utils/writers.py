@@ -3,10 +3,11 @@
 """
 """
 
+from builtins import object
 import numpy as np
 from struct import pack
 from base64 import b64encode
-from itertools import izip
+
 from ..exceptions import VtkError
 
 
@@ -42,7 +43,7 @@ numpy2vtk_datatype = {'int8'    : 'Int8',
 
 def _reorder_data(data, offsets, types, indexarr_map):
     start = 0
-    for stop, typ in izip(offsets, types):
+    for stop, typ in zip(offsets, types):
         indarr = indexarr_map.get(typ)
         if indarr is not None:
             data[start:stop] = data[start:stop][indarr]
@@ -227,7 +228,7 @@ class VtuWriter(object):
         s += '<{}'.format(tag)
         if kwargs:
             s += ' '
-            s += ' '.join(['{}="{}"'.format(k, v) for k, v in kwargs.items()])
+            s += ' '.join(['{}="{}"'.format(k, v) for k, v in list(kwargs.items())])
         if selfclosing:
             s += ' />\n'
         else:
