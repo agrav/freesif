@@ -3,7 +3,6 @@
 """
 """
 
-from builtins import object
 import numpy as np
 from struct import pack
 from base64 import b64encode
@@ -84,7 +83,7 @@ class VtuWriter(object):
 
     """
 
-    def __init__(self, filename, format='binary'):
+    def __init__(self, filename):
         """
         """
         self._file = open(filename, 'wb')
@@ -182,7 +181,7 @@ class VtuWriter(object):
                            **compname_dict)
 
         # write indent
-        self._file.write('  '*len(self._elements))
+        self._file.write(b'  '*len(self._elements))
 
         # write header
         nbytes = arr.size * arr.dtype.itemsize
@@ -196,7 +195,7 @@ class VtuWriter(object):
         self._file.write(b64encode(header + arrstr))
 
         # write newline
-        self._file.write('\n')
+        self._file.write(b'\n')
 
         self._close_element('DataArray')
 
@@ -224,23 +223,24 @@ class VtuWriter(object):
             self._celldata_open = False
 
     def _open_element(self, tag, selfclosing=False, **kwargs):
-        s = '  '*len(self._elements)  # indentation
-        s += '<{}'.format(tag)
+        s = b'  '*len(self._elements)  # indentation
+        s += b'<%s' % tag.encode()
         if kwargs:
-            s += ' '
-            s += ' '.join(['{}="{}"'.format(k, v) for k, v in list(kwargs.items())])
+            s += b' '
+            s += b' '.join([b'%s="%s"' % (str(k).encode(), str(v).encode())
+                for k, v in list(kwargs.items())])
         if selfclosing:
-            s += ' />\n'
+            s += b' />\n'
         else:
-            s += '>\n'
+            s += b'>\n'
             self._elements.append(tag)
         self._file.write(s)
 
     def _close_element(self, tag):
         if not tag == self._elements.pop():
             raise VtkError('{} has no corresponding opening tag'.format(tag))
-        s = '  '*len(self._elements)
-        s += '</{}>\n'.format(tag)
+        s = b'  '*len(self._elements)
+        s += b'</%s>\n' % tag.encode()
         self._file.write(s)
 
 

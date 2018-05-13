@@ -3,7 +3,6 @@
 """Base class for all data classes.
 """
 
-from builtins import object
 import tables as tb
 import numpy as np
 

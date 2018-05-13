@@ -4,8 +4,6 @@
 """
 from __future__ import print_function
 
-#from builtins import zip
-#from builtins import str
 from os import path
 import tables as tb
 import re

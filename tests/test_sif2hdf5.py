@@ -66,7 +66,7 @@ class TestSIF2HDF5(unittest.TestCase):
         self.assertTrue(os.path.isfile(self._out_files['sif_hydro']))
 
         # TODO: check that type/number of records on h5 file is correct inside
-        # the following methods
+        # the following tests
 
     def test_open_SIU_single(self):
         f = fs.open_hdf5(self._out_files['siu_single'])

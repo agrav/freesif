@@ -6,8 +6,6 @@ files.
 
 from __future__ import division
 
-from builtins import range
-from builtins import object
 import struct
 from math import ceil
 import io
