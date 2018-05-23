@@ -238,7 +238,8 @@ class UnformattedFile(SequentialFile):
         """
 
         pos = self.f.tell()
-        rec_name = self.f.read(9)[1:].strip().decode()
+#        rec_name = self.f.read(9)[1:].strip().decode()
+        rec_name = self.f.read(9)[1:].strip()
         self.f.seek(pos)
 
         if not self.hasrest and rec_name in self.allowed_record_names:
