@@ -571,7 +571,8 @@ class FirstLevelData(StrucData):
         if disconnected:
             indices = self._get_nodeindices(sets, kind, disconnected)
             indices = self._update_connectivity(indices)
-            return data.take(indices, axis=0)
+            axis = 0 if nres == 1 else 1
+            return data.take(indices, axis=axis)
 
         return data
 
