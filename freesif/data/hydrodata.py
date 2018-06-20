@@ -282,7 +282,7 @@ class HydroData(SifData):
             p.shape = (self._ndirs, self._nfreqs, self._npoints)
             p = np.rollaxis(p, 2)
             if kind == 'elevation':
-                return p / self.ro * self.g
+                return p / self.ro / self.g
             return p
         elif kind == 'velocity':
             v.shape = (self._ndirs, self._nfreqs, self._npoints, 3)
