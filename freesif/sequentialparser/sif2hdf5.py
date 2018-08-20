@@ -176,7 +176,7 @@ def sif2hdf5(sifname, hdf5name=None, append=False, usefileprefix=True,
     real_path = path.realpath(sifname)
     fdir, fname = path.split(real_path)
 
-    name_pattern = '(?i)(?P<prefix>\w*?)' + \
+    name_pattern = '(?i)(?P<prefix>[\w-]*?)' + \
                    '(?P<letter>[rtgl])' + \
                    '[1-9]\d*(H[1-9]\d*)?.' + \
                    '(?P<ext>(si[fun]|fem))'
