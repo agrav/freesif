@@ -132,18 +132,6 @@ class File(object):
         self._check_isopen()
         return self._data.items()
 
-    def iterkeys(self):  # dict interface
-        self._check_isopen()
-        return self._data.iterkeys()
-
-    def itervalues(self):  # dict interface
-        self._check_isopen()
-        return self._data.itervalues()
-
-    def iteritems(self):  # dict interface
-        self._check_isopen()
-        return self._data.iteritems()
-
     def __contains__(self, name):  # dict interface
         self._check_isopen()
         return name in self._data
@@ -155,7 +143,7 @@ class File(object):
             return '<Closed File object>'
 
         s = ''
-        for k, v in sorted(self._data.iteritems()):
+        for k, v in sorted(self._data.items()):
             s += '{!r}: {!s}\n'.format(k, v)
         return s
 
@@ -166,12 +154,12 @@ class File(object):
             return '<Closed File object>'
 
         s = ''
-        for d in sorted(self._data.itervalues()):
+        for d in sorted(self._data.values()):
             s += '{!r}\n'.format(d)
         return s
 
     def __iter__(self):  # NOT dict behaviour! values instead of keys
-        return self.itervalues()
+        return self.values()
 
     def _check_isopen(self):
         if not self._isopen:

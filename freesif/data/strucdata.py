@@ -903,6 +903,18 @@ class FirstLevelData(StrucData):
     def get_conceptnames(self, sets=None):
         pass
 
+    def get_section_properties(self, sets=None):
+        """Get beam section properties
+        """
+        gelref1, geono, fixno, eccno, transno = self._get_record('gelref1')
+        gbeamg = self._get_record('gbeamg')
+        gbeamg_arr = gbeamg[:]
+        elemindices = self._get_elementindices(sets, 'beam')
+
+        geono_bm = gelref1.col('geono').take(elemindices)
+        gbeamg_indices = dict(zip(gbeamg.col('geono'), range((len(gbeamg)))))
+        return np.array([gbeamg_arr[gbeamg_indices[gbm]] for gbm in geono_bm])
+
 
     # to be memory efficient:
     # iter_noderesults(), iter_elementresults(), iter_conceptresults()  ??
