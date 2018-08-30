@@ -915,6 +915,18 @@ class FirstLevelData(StrucData):
         gbeamg_indices = dict(zip(gbeamg.col('geono'), range((len(gbeamg)))))
         return np.array([gbeamg_arr[gbeamg_indices[gbm]] for gbm in geono_bm])
 
+    def get_shell_thicknesses(self, sets=None):
+        """Get shell thicknesses
+        """
+        gelref1, geono, fixno, eccno, transno = self._get_record('gelref1')
+        gelth = self._get_record('gelth')
+        gelth_arr = gelth.col('th')
+        elemindices = self._get_elementindices(sets, 'shell')
+
+        geono_sh = gelref1.col('geono').take(elemindices)
+        gelth_indices = dict(zip(gelth.col('geono'), range((len(gelth)))))
+        return np.array([gelth_arr[gelth_indices[gsh]] for gsh in geono_sh])
+
 
     # to be memory efficient:
     # iter_noderesults(), iter_elementresults(), iter_conceptresults()  ??
