@@ -130,13 +130,14 @@ class SequentialFile(object):
         pos = self.f.tell()  # current position in in_file
         string_rec = self.read_stringrec()
 
-        if string_rec[:8] == b'        ':  # type 1 cont. record
-            while string_rec[:8] == b'        ':  # read cont. recs
-                string_rec = self.read_stringrec()
-            return string_rec[:8].decode().strip(), self.tofloatrec(string_rec[8:])
+        if string_rec[:8] == self._contrec_leadingspace:  # type 1 cont. record
+#            while string_rec[:8] == self._contrec_leadingspace:  # read cont. recs
+#                string_rec = self.read_stringrec()
+#            return string_rec[:8].decode().strip(), self.tofloatrec(string_rec[8:])
+            return self.skip_contrecs(string_rec)
 
         elif string_rec[:8].strip() in self.allowed_record_names: # no cont. records
-            return string_rec[:8].decode().strip(), self.tofloatrec(string_rec[8:])
+            return self.strip_recname(string_rec[:8]), self.tofloatrec(string_rec[8:])
 
         else:  # type 2 record
             nfloats = int(rec[0]) - 4  # nfield - 4
@@ -176,6 +177,7 @@ class UnformattedFile(SequentialFile):
         elif mode == 'w':
             self.f.write(b'K')  # write mandatory(?) 1st byte
         self.allowed_record_names = allowed_record_names_b
+        self._contrec_leadingspace = b'        '
 
     def read_stringrec(self):
 
@@ -247,6 +249,15 @@ class UnformattedFile(SequentialFile):
 
         return False
 
+    def strip_recname(self, rec_name):
+        return rec_name.decode().strip()
+
+    def skip_contrecs(self, string_rec):
+        while string_rec[:8] == self._contrec_leadingspace:
+            string_rec = self.read_stringrec()
+        return self.strip_recname(string_rec[:8]), self.tofloatrec(string_rec[8:])
+
+
 
 class FormattedFile(SequentialFile):
 
@@ -256,6 +267,7 @@ class FormattedFile(SequentialFile):
         # remaining float places on current record (used for write mode)
         self.float_places_left = 0
         self.allowed_record_names = allowed_record_names_str
+        self._contrec_leadingspace = '        '
 
 
     def read_stringrec(self):
@@ -325,6 +337,14 @@ class FormattedFile(SequentialFile):
             return True
 
         return False
+
+    def strip_recname(self, rec_name):
+        return rec_name.strip()
+
+    def skip_contrecs(self, string_rec):
+        while string_rec[:8] == self._contrec_leadingspace:
+            string_rec = self.read_stringrec()
+        return self.strip_recname(string_rec[:8]), self.tofloatrec(string_rec[8:])
 
     def _write_line(self, header, rec):
         if self.float_places_left:
