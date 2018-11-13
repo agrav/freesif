@@ -31,7 +31,7 @@ def parse_sifname(filename):
     """
     _, fname = path.split(filename)
 
-    name_pattern = '(?i)(?P<prefix>\w*?)' + \
+    name_pattern = '(?i)(?P<prefix>[\w-]*?)' + \
                    '(?P<letter>[rtgl])' + \
                    '(?P<selno>[1-9]\d*)' + \
                    '(H[1-9]\d*)?.' + \
