@@ -39,9 +39,6 @@ file_methods_and_args = [('__contains__', ('key',)),
                          ('__iter__', ()),
                          ('get', ('key',)),
                          ('items', ()),
-                         ('iteritems', ()),
-                         ('iterkeys', ()),
-                         ('itervalues', ()),
                          ('keys', ()),
                          ('values', ())]
 

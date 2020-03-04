@@ -24,8 +24,8 @@ setup(
         #   5 - Production/Stable
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
-#        'Programming Language :: Python :: 3.4',
+        # 'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
     ],
     keywords='sesam structural hydrodynamic',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
