@@ -5,6 +5,7 @@ Test sif2hdf5 function for different filetypes.
 import unittest
 import freesif as fs
 import os
+import shutil
 
 
 FILES = os.path.join(os.path.dirname(__file__), 'files')
@@ -36,21 +37,24 @@ class TestSIF2HDF5(unittest.TestCase):
             sif_hydro=os.path.join(FILES, 'tmp', 'sif_hydro_G1.h5')
         )
 
-        # create /tmp folder if it doesn't exist
-        if not os.path.isdir(os.path.join(FILES, 'tmp')):
+        # create a clean /tmp directory
+        try:
+            shutil.rmtree(os.path.join(FILES, 'tmp'))
+        except FileNotFoundError:
+            # ok, so it was already removed
+            pass
+        finally:
+            # create empty directory
             os.mkdir(os.path.join(FILES, 'tmp'))
-
-        # remove h5-files if exist
-        for fname in cls._out_files.values():
-            if os.path.isfile(fname):
-                os.remove(fname)
 
     @classmethod
     def tearDownClass(cls):
-        # remove h5-files
-        for fname in cls._out_files.values():
-            if os.path.isfile(fname):
-                os.remove(fname)
+        # remove '\tmp' directory with H5 files
+        try:
+            shutil.rmtree(os.path.join(FILES, 'tmp'))
+        except FileNotFoundError:
+            # ok, so it was already removed
+            pass
 
     def test_SIU_single(self):
         fs.sif2hdf5(self._in_files['siu_single'], hdf5name=self._out_files['siu_single'])
