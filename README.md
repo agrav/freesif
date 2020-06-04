@@ -115,8 +115,7 @@ sphinx-build -b html docs\source docs\_build
 --->
 
 ### Deployment
-Packaging, unit testing and deployment to [Packagr](https://app.packagr.app) is automated using
-[Travis-CI](https://travis-ci.com).
+Packaging, unit testing and deployment to [PyPi](https://pypi.org) is automated using GitHub Actions.
 
 ### Versioning
 
@@ -125,7 +124,6 @@ We apply the "major.minor.micro" versioning scheme defined in [PEP 440](https://
 Cut a new version by applying a Git tag like `1.0.1` at the desired commit and then
 [setuptools_scm](https://github.com/pypa/setuptools_scm/#setup-py-usage) takes care of the rest. For the versions
 available, see the [tags on this repository](https://github.com/agrav/freesif/tags).
---->
 
 ## Authors
 
