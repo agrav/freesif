@@ -86,10 +86,10 @@ help(freesif)
 
 ### Running the tests
 
-The unit tests are automated using the `unittest` framework. Run the test by...
+The unit tests are automated using the `unittest` and `pytest` framework. Run the test by...
 
 ```console
-python -m unittest discover
+pytest --cov=freesif --cov-report term-missing tests/
 ```
 
 ### Building the package
