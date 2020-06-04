@@ -97,6 +97,7 @@ pytest --cov=freesif --cov-report term-missing tests/
 Build tarball and wheel distributions by:
 
 ```console
+pip install wheel
 python setup.py sdist bdist_wheel
 ```
 
