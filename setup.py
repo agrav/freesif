@@ -28,6 +28,7 @@ setup(
 
     # meta data
     long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     keywords='sesam structural hydrodynamic',
     url='https://github.com/agrav/freesif',
     author='Audun Gravdal Johansen',
