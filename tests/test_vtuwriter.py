@@ -8,6 +8,10 @@ Created on Sun May 13 22:22:07 2018
 import unittest
 import freesif as fs
 import os
+import shutil
+
+
+FILES = os.path.join(os.path.dirname(__file__), 'files')
 
 
 class TestVtuWriter(unittest.TestCase):
@@ -18,24 +22,27 @@ class TestVtuWriter(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # file names
-        cls._in_files = {'siu_single': './files/struc/single_super_elem/test01_2ndord_linstat_R1.SIU'}
-        cls._out_files = {'siu_single': './files/tmp/siu_single.vtu'}
+        cls._in_files = dict(siu_single=os.path.join(FILES, 'struc', 'single_super_elem', 'test01_2ndord_linstat_R1.SIU'))
+        cls._out_files = dict(siu_single=os.path.join(FILES, 'tmp', 'siu_single.vtu'))
 
-        # create /tmp folder if it doesn't exist
-        if not os.path.isdir('./files/tmp'):
-            os.mkdir('./files/tmp')
-
-        # remove h5-files if exist
-        for fname in cls._out_files.values():
-            if os.path.isfile(fname):
-                os.remove(fname)
+        # create a clean /tmp directory
+        try:
+            shutil.rmtree(os.path.join(FILES, 'tmp'))
+        except FileNotFoundError:
+            # ok, so it was already removed
+            pass
+        finally:
+            # create empty directory
+            os.mkdir(os.path.join(FILES, 'tmp'))
 
     @classmethod
     def tearDownClass(cls):
-        # remove h5-files
-        for fname in cls._out_files.values():
-            if os.path.isfile(fname):
-                os.remove(fname)
+        # remove '\tmp' directory with H5 files
+        try:
+            shutil.rmtree(os.path.join(FILES, 'tmp'))
+        except FileNotFoundError:
+            # ok, so it was already removed
+            pass
 
     def test_SIU_single_noderesults(self):
         """Write some node results for whole model with disconnected=False

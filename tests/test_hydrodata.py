@@ -2,9 +2,13 @@
 """Test HydroData public methods
 """
 
+import os
 import unittest
 import numpy as np
 import freesif as fs
+
+
+FILES = os.path.join(os.path.dirname(__file__), 'files')
 
 
 class TestHydroData(unittest.TestCase):
@@ -12,9 +16,8 @@ class TestHydroData(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish HydroData instances and associated verification data
-        cls._data1 = fs.open_sif('files/hydro/slowdrift_G1.SIF')
-        cls._data1_verified = np.load(
-            'files/hydro/slowdrift_G1_verified_arrs.npz')
+        cls._data1 = fs.open_sif(os.path.join(FILES, 'hydro', 'slowdrift_G1.SIF'))
+        cls._data1_verified = np.load(os.path.join(FILES, 'hydro', 'slowdrift_G1_verified_arrs.npz'))
 
     @classmethod
     def tearDownClass(cls):

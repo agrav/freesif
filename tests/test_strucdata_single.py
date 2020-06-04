@@ -2,14 +2,16 @@
 """Test StrucData public methods with varying data and arguments for single
 superelement results.
 """
-
+import os
 import unittest
 import numpy as np
 import h5py
 import freesif as fs
+# TODO: use pytables instead of h5py for the verified data to avoid dependency on h5py
 
-# TODO: use pytables instead of h5py for the verified data to avoid dependency
-#       on h5py
+
+FILES = os.path.join(os.path.dirname(__file__), 'files')
+
 
 class TestStrucDataCase01(unittest.TestCase):
     """1st order 3-node triangular plate elements, element results
@@ -18,8 +20,8 @@ class TestStrucDataCase01(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_1stord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_1stord_linstat_R1/LD_plates/elemres']
 
     @classmethod
@@ -83,8 +85,8 @@ class TestStrucDataCase02(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_1stord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_1stord_linstat_R1/LD_plates/noderes']
 
     @classmethod
@@ -120,8 +122,8 @@ class TestStrucDataCase03(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_1stord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_1stord_linstat_R1/LD_beams/elemres']
         cls._sets = ['LD_chords', 'LD_beams']
 
@@ -157,8 +159,8 @@ class TestStrucDataCase04(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_1stord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_1stord_linstat_R1/MD_plates/elemres']
 
     @classmethod
@@ -222,8 +224,8 @@ class TestStrucDataCase05(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_1stord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_1stord_linstat_R1/MD_plates/noderes']
 
     @classmethod
@@ -259,8 +261,8 @@ class TestStrucDataCase06(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_2ndord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_2ndord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_2ndord_linstat_R1/LD_plates/elemres']
 
     @classmethod
@@ -301,8 +303,8 @@ class TestStrucDataCase07(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_2ndord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_2ndord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_2ndord_linstat_R1/LD_plates/noderes']
 
     @classmethod
@@ -338,8 +340,8 @@ class TestStrucDataCase08(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_2ndord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_2ndord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_2ndord_linstat_R1/LD_beams/elemres']
         cls._sets = ['LD_chords', 'LD_beams']
 
@@ -375,8 +377,8 @@ class TestStrucDataCase09(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_2ndord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_2ndord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_2ndord_linstat_R1/MD_plates/elemres']
 
     @classmethod
@@ -417,8 +419,8 @@ class TestStrucDataCase10(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish StrucData instances and associated verification data
-        cls._data = fs.open_sif('files/struc/single_super_elem/test01_2ndord_linstat_R1.SIU')
-        cls._f_verified = h5py.File('files/verified_testdata.h5', 'r')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_2ndord_linstat_R1.SIU'))
+        cls._f_verified = h5py.File(os.path.join(FILES, 'verified_testdata.h5'), 'r')
         cls._gr_verified = cls._f_verified['test01_2ndord_linstat_R1/MD_plates/noderes']
 
     @classmethod

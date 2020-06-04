@@ -1,0 +1,4 @@
+numpy==1.18.4
+tables==3.6.1
+h5py==2.10.0
+pytest-cov==2.8.1
