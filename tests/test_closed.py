@@ -6,6 +6,10 @@ import os
 import unittest
 import freesif as fs
 
+
+FILES = os.path.join(os.path.dirname(__file__), 'files')
+
+
 hydrodata_methods_and_args = [('get_addedmass', ()),
                               ('get_angular_freqs', ()),
                               ('get_bodymass', ()),
@@ -48,7 +52,7 @@ class TestHydroData(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish a closed HydroData instance
-        cls._data = fs.open_sif('./files/hydro/slowdrift_G1.SIF')
+        cls._data = fs.open_sif(os.path.join(FILES, 'hydro', 'slowdrift_G1.SIF'))
         cls._data.close()
 
     def test_methods(self):
@@ -68,7 +72,7 @@ class TestStrucData(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # establish a closed StrucData instance (single sup. elem.)
-        cls._data = fs.open_sif('./files/struc/single_super_elem/test01_1stord_linstat_R1.SIU')
+        cls._data = fs.open_sif(os.path.join(FILES, 'struc', 'single_super_elem', 'test01_1stord_linstat_R1.SIU'))
         cls._data.close()
 
     def test_methods(self):
@@ -89,7 +93,7 @@ class TestFile(unittest.TestCase):
     def setUpClass(cls):
 
         # establish a closed File instance
-        cls._fname = fs.sif2hdf5('./files/hydro/slowdrift_G1.SIF')
+        cls._fname = fs.sif2hdf5(os.path.join(FILES, 'hydro', 'slowdrift_G1.SIF'))
         cls._file = fs.open_hdf5(cls._fname)
         cls._file.close()
 

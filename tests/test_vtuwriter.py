@@ -10,6 +10,9 @@ import freesif as fs
 import os
 
 
+FILES = os.path.join(os.path.dirname(__file__), 'files')
+
+
 class TestVtuWriter(unittest.TestCase):
     """Test the VtuWriter class. It is only checked that the correct file is
     created without errors.
@@ -18,12 +21,12 @@ class TestVtuWriter(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # file names
-        cls._in_files = {'siu_single': './files/struc/single_super_elem/test01_2ndord_linstat_R1.SIU'}
-        cls._out_files = {'siu_single': './files/tmp/siu_single.vtu'}
+        cls._in_files = dict(siu_single=os.path.join(FILES, 'struc', 'single_super_elem', 'test01_2ndord_linstat_R1.SIU'))
+        cls._out_files = dict(siu_single=os.path.join(FILES, 'tmp', 'siu_single.vtu'))
 
         # create /tmp folder if it doesn't exist
-        if not os.path.isdir('./files/tmp'):
-            os.mkdir('./files/tmp')
+        if not os.path.isdir(os.path.join(FILES, 'tmp')):
+            os.mkdir(os.path.join(FILES, 'tmp'))
 
         # remove h5-files if exist
         for fname in cls._out_files.values():
