@@ -16,8 +16,6 @@ The following file formats are currently supported:
 
 ### Getting started
 
-### Getting started
-
 Install the latest release
 
 ```console
