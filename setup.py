@@ -14,6 +14,7 @@ def read(fname):
 setup(
     # package data
     name='freesif',
+    version='0.1.2',
     description='Get data from Sesam Interface Files',
     use_scm_version=True,
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
