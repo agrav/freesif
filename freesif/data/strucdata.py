@@ -947,3 +947,26 @@ class FirstLevelData(StrucData):
     def get_result_component_names(self, restype):
         pass
 
+    def get_resultcase_names(self, rescases=None):
+        """Get loadcase names.
+
+        Parameters
+        ----------
+        rescases : int, sequence or None
+            External result case number(s)
+
+        Returns
+        -------
+        result : dict
+            Result case numbers as keys, result case names as values.
+        """
+        loadtable, _ = self._get_record('tdload')
+        idnos = loadtable.col('idno')
+        names = loadtable.col('name')
+        if rescases is None:
+            pass
+        else:
+            extract_elements = np.isin(idnos, rescases)
+            idnos = idnos[extract_elements]
+            names = names[extract_elements]
+        return dict(zip(idnos, names))
