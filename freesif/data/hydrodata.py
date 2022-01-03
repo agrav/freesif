@@ -236,7 +236,7 @@ class HydroData(SifData):
         return np.rollaxis(data, 2)
 
     def get_sectionforce_raos(self, bodyid=1):
-        """Get excitation force RAOs.
+        """Get sectional force RAOs.
 
         Parameters
         ----------
