@@ -893,6 +893,112 @@ class FirstLevelData(StrucData):
         # freesif.calc.complex_eval(arr, phase)
         # freesif.calc.complex_expand(arr, phase_step=10)
 
+    def get_element_local_cs(self, sets=None, kind=None):
+
+        if kind in [None, 'beam']:
+            # get beam local z
+            gelref1, geono, fixno, eccno, transno = self._get_record('gelref1')
+            gunivec = self._get_record('gunivec')
+            gunivec_indices = dict(zip(gunivec.col('transno'), range((len(gunivec)))))
+            gunivec_arr = gunivec[:]
+            elemindices_bm = self._get_elementindices(sets, 'beam')
+            transno_bm = gelref1.col('transno').take(elemindices_bm)
+            if transno_bm[0] == -1:
+                assert np.all(transno_bm == -1), 'Mixed beam element types not supported'
+                transno_bm = transno[:].reshape(-1, 3)[:, 1]  # mid-node
+            gunivec_bm = np.array([gunivec_arr[gunivec_indices[tbm]] for tbm in transno_bm])
+            zvec_bm = np.stack([gunivec_bm['unix'], gunivec_bm['uniy'], gunivec_bm['uniz']], axis=1)
+
+            # calculate beam local x
+            nodes_bm = self.get_nodes(sets, 'beam')
+            elems_bm = self.get_elements(sets, 'beam')
+            connectivities, offsets, eltyps = elems_bm
+            xvecs_bm_lst = []
+            start = 0
+            for stop, eltyp in zip(offsets, eltyps):
+                connectivity = connectivities[start:stop]
+                start = stop
+                if eltyp == 15:  # BEAS
+                    xvec = nodes_bm[connectivity[1], :] - nodes_bm[connectivity[0], :]
+                elif eltyp == 23:  # BTSS
+                    xvec = nodes_bm[connectivity[2], :] - nodes_bm[connectivity[0], :]
+                else:
+                    raise ValueError(f'Unsupported element type {eltyp}')
+                xvec /= np.linalg.norm(xvec)
+                xvecs_bm_lst.append(xvec)
+            xvec_bm = np.stack(xvecs_bm_lst)
+
+            # calculate beam local y
+            yvec_bm = np.cross(zvec_bm, xvec_bm)
+
+        if kind in [None, 'shell']:
+            # calculate shell local z
+            nodes_sh = self.get_nodes(sets, 'shell')
+            elems_sh = self.get_elements(sets, 'shell')
+            connectivities, offsets, eltyps = elems_sh
+            zvecs_sh_lst = []
+            start = 0
+            for stop, eltyp in zip(offsets, eltyps):
+                connectivity = connectivities[start:stop]
+                start = stop
+                if eltyp == 25:  # FTRS
+                    v1 = nodes_sh[connectivity[1], :] - nodes_sh[connectivity[0], :]
+                    v2 = nodes_sh[connectivity[2], :] - nodes_sh[connectivity[0], :]
+                elif eltyp == 24:  # FQUS
+                    v1 = nodes_sh[connectivity[1], :] - nodes_sh[connectivity[0], :]
+                    v2 = nodes_sh[connectivity[3], :] - nodes_sh[connectivity[0], :]
+                elif eltyp == 26:  # SCTS
+                    v1 = nodes_sh[connectivity[4], :] - nodes_sh[connectivity[0], :]
+                    v2 = nodes_sh[connectivity[2], :] - nodes_sh[connectivity[0], :]
+                elif eltyp == 28:  # SCQS
+                    v1 = nodes_sh[connectivity[2], :] - nodes_sh[connectivity[0], :]
+                    v2 = nodes_sh[connectivity[6], :] - nodes_sh[connectivity[0], :]
+                else:
+                    raise ValueError(f'Unsupported element type {eltyp}')
+                zvec = np.cross(v1, v2)
+                zvec /= np.linalg.norm(zvec)
+                zvecs_sh_lst.append(zvec)
+            zvec_sh = np.stack(zvecs_sh_lst)
+
+            # calculate shell local x
+            # project super element x-axis onto shell surface
+            xvecs_sh_lst = []
+            xvec_sel = np.array([1., 0., 0.])
+            for zvec in zvec_sh:
+                zvec_norm = np.linalg.norm(zvec_sh)
+                proj = (np.dot(xvec_sel, zvec) / zvec_norm ** 2) * zvec
+                xvecs_sh_lst.append(xvec_sel - proj)
+            xvec_sh = np.stack(xvecs_sh_lst)
+
+            # calculate beam local y
+            yvec_sh = np.cross(zvec_sh, xvec_sh)
+
+
+        if kind == 'beam':
+            return xvec_bm, yvec_bm, zvec_bm
+        elif kind == 'shell':
+            return xvec_sh, yvec_sh, zvec_sh
+        elif kind is None:
+
+            shape = (len(self._get_elementindices()), 3)
+            elemindices_sh = self._get_elementindices(sets, 'shell')
+            elemindices_all = self._get_elementindices(sets)
+
+            xvec = np.zeros(shape=shape)
+            yvec = np.zeros(shape=shape)
+            zvec = np.zeros(shape=shape)
+
+            xvec[elemindices_bm, :] = xvec_bm
+            yvec[elemindices_bm, :] = yvec_bm
+            zvec[elemindices_bm, :] = zvec_bm
+
+            xvec[elemindices_sh, :] = xvec_sh
+            yvec[elemindices_sh, :] = yvec_sh
+            zvec[elemindices_sh, :] = zvec_sh
+
+            return xvec[elemindices_all], yvec[elemindices_all], zvec[elemindices_all]
+        else:
+            raise ValueError('kind must be None, "beam" or "shell"')
 
     def get_concepts(self, sets=None):
         pass
