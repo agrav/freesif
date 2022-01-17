@@ -30,3 +30,7 @@ class VtfError(Exception):
 
 class VtkError(Exception):
     pass
+
+
+class NoDataError(Exception):
+    pass
