@@ -352,7 +352,7 @@ class FormattedFile(SequentialFile):
             # self.write(' '*self.float_places_left*16 + '\n')
             self.f.write('\n')
 
-        self.write('{:<8}'.format(header))
+        self.f.write('{:<8}'.format(header))
         for f in rec:
             self.f.write('{:>16.8e}'.format(f))
 
