@@ -992,13 +992,17 @@ class FirstLevelData(StrucData):
         # project super element x-axis onto shell surface
         xvecs_sh_lst = []
         xvec_sel = np.array([1., 0., 0.])
+        yvec_sel = np.array([0., 1., 0.])
+        zero_vec = np.array([0., 0., 0.])
         for zvec in zvec_sh:
-            zvec_norm = np.linalg.norm(zvec_sh)
+            zvec_norm = np.linalg.norm(zvec)
             proj = (np.dot(xvec_sel, zvec) / zvec_norm ** 2) * zvec
-            xvecs_sh_lst.append(xvec_sel - proj)
+            xvec = xvec_sel - proj
+            if np.allclose(xvec, zero_vec):
+                proj = (np.dot(yvec_sel, zvec) / zvec_norm ** 2) * zvec
+                xvec = yvec_sel - proj
+            xvecs_sh_lst.append(xvec / np.linalg.norm(xvec))
         xvec_sh = np.stack(xvecs_sh_lst)
-        # TODO: handle case where the projection is zero-vector
-        #       (global x-vec and local z-vec are parallel)
 
         # calculate shell local y
         yvec_sh = np.cross(zvec_sh, xvec_sh)
