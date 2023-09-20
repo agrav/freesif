@@ -8,5 +8,5 @@ from .data.file import File, open_hdf5, open_sif
 from . import utils
 from . import calc
 
-__version__ = '0.1'
+__version__ = '0.1.2'
 __all__ = ['sif2hdf5', 'File', 'utils', 'open_hdf5', 'open_sif', 'calc']
