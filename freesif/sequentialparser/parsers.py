@@ -2457,3 +2457,43 @@ def WINPUT_reader(rec_name, rec, in_file, out_file):
 
 readers['WINPUT'] = WINPUT_reader
 
+# ---W1PANPRE----------------------------------------------------------------- #
+
+class W1PANPRE_rec(tb.IsDescription):
+    nfield = tb.Int32Col(pos=0)
+    ibcond = tb.Int32Col(pos=1)
+    iwres = tb.Int32Col(pos=2)
+    ippan = tb.Int32Col(pos=3)
+    isymm1 = tb.Int32Col(pos=4)
+    icompl = tb.Int32Col(pos=5)
+    p = tb.ComplexCol(itemsize=8, pos=6)
+    ipan = tb.Int32Col(pos=9)
+    isymm2 = tb.Int32Col(pos=10)
+
+
+descriptors['W1PANPRE'] = W1PANPRE_rec
+
+def W1PANPRE_reader(rec_name, rec, in_file, out_file):
+
+    table = get_table(rec_name, out_file)
+    recs = recdata(table)
+
+    while rec_name == 'W1PANPRE':
+        f = in_file.read_floats(2)
+        rec += f
+        if int(f[1]):
+            f = in_file.read_floats(2)
+            rec += (complex(f[0], f[1]),)
+        else:
+            f = in_file.read_floats(1)
+            rec += (complex(f[0], 0),)
+        f = in_file.read_floats(2)
+        rec += f
+
+        recs.add(rec)
+        rec_name, rec = in_file.read_headerrec()
+    recs.write()
+    return rec_name, rec
+
+
+readers['W1PANPRE'] = W1PANPRE_reader

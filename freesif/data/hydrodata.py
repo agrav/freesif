@@ -404,3 +404,95 @@ class HydroData(SifData):
         forces = self._get_results('w2hdrift', bodyid, 'shfor')
         forces.shape = (self._ndirs, self._nfreqs, 3)
         return np.rollaxis(forces, 2)
+
+    def _n_pressure_panels(self, bodyid=1):
+        try:
+            return len(np.unique(self._get_results('w1panpre', bodyid, 'ipan')))
+        except NoSuchRecordError:
+            return 0
+
+    def _n_symmetry_parts(self, bodyid=1):
+        try:
+            return len(np.unique(self._get_results('w1panpre', bodyid, 'isymm1')))
+        except NoSuchRecordError:
+            return 0
+
+    def get_pressure_panel_ids(self, bodyid=1):
+        """Get panels exposed to panel pressure
+
+        Parameters
+        ----------
+        bodyid : int, optional
+            External body identification number. Default is 1
+
+        Returns
+        -------
+        data : 3d numpy.ndarray (complex64)
+            panel overview (panel number, symmetry) with shape (len(panels), len(symmetry_part))
+            where 1st axis corresponds to the panel number,  2nd to the corresponding.
+        """
+        self._assert_domaintype('frequency')
+        _npanels = self._n_pressure_panels(bodyid=bodyid)
+        _nsymm = self._n_symmetry_parts(bodyid=bodyid)
+
+        if _npanels is not 0:
+
+            panels = self._get_results('w1panpre', bodyid, 'ipan')
+            symms = self._get_results('w1panpre', bodyid, 'isymm1')
+
+            panel_ids = []
+            for symm in np.unique(symms):
+                for panel in np.unique(panels):
+                    panel_ids.append((panel, symm))
+
+            for panel, symm in zip(panels, symms):
+                assert (panel, symm) in panel_ids
+
+            return np.array(panel_ids)
+        else:
+            return None
+
+    def get_panel_pressures(self, bodyid=1):
+        """Get panel pressure
+
+        Parameters
+        ----------
+        bodyid : int, optional
+            External body identification number. Default is 1
+
+        Returns
+        -------
+        data : 3d numpy.ndarray (complex64)
+            force data with shape (len(panels), len(symmetry_part), len(dirs), len(freqs)) where 1st
+            axis corresponds to the panel number,  2nd to the symmertry part, 3nd to direction
+            and 4th to frequency.
+        """
+
+        self._assert_domaintype('frequency')
+        _npanels = self._n_pressure_panels(bodyid=bodyid)
+        _nsymm = self._n_symmetry_parts(bodyid=bodyid)
+
+        if _npanels is not 0:
+            pressures = self._get_results('w1panpre', bodyid, 'p')
+            pressures.shape = (self._ndirs, self._nfreqs,  _nsymm, _npanels)
+            return np.moveaxis(pressures, [2, 3], [1, 0])
+        else:
+            return None
+
+    def get_results(self, rec_name, bodyid, *fields):
+        """Get a set of columns (given by `fields`) from result records
+        (`rec_name`). `bodyid` should be None if not relevant (e.g. wfluidkn)
+        Returns an array for each field
+        """
+
+        res = self._get_record(rec_name)
+        if bodyid:
+            ibcond = self._get_ibcond(bodyid)
+            # get all records for this ibcond
+            res_recs = res.read_where('ibcond=={}'.format(ibcond))
+        else:
+            res_recs = res[:]
+        # return res_recs[list(fields)]  # structured array
+        if len(fields) > 1:
+            return tuple(res_recs[field] for field in fields)
+        return res_recs[fields[0]]
