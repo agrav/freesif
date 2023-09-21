@@ -478,21 +478,3 @@ class HydroData(SifData):
             return np.moveaxis(pressures, [2, 3], [1, 0])
         else:
             return None
-
-    def get_results(self, rec_name, bodyid, *fields):
-        """Get a set of columns (given by `fields`) from result records
-        (`rec_name`). `bodyid` should be None if not relevant (e.g. wfluidkn)
-        Returns an array for each field
-        """
-
-        res = self._get_record(rec_name)
-        if bodyid:
-            ibcond = self._get_ibcond(bodyid)
-            # get all records for this ibcond
-            res_recs = res.read_where('ibcond=={}'.format(ibcond))
-        else:
-            res_recs = res[:]
-        # return res_recs[list(fields)]  # structured array
-        if len(fields) > 1:
-            return tuple(res_recs[field] for field in fields)
-        return res_recs[fields[0]]
