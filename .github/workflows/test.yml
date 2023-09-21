@@ -35,7 +35,7 @@ jobs:
     - name: Test and report coverage
       run: |
         # make package discoverable
-        pip install . --no-dev
+        pip install . --no-deps
         # List terminal lines with missing test
         pytest -s tests/ --cov=freesif --cov-report=term-missing
         # future: add --cov-fail-under=95 to fail if coverage is less than 95%
