@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "freesif"
+version = "0.2.0"
+description = "Get data from Sesam Interface Files"
+authors = ["Audun Gravdal Johansen <audun.gravdal.johansen@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/agrav/freesif"
+packages = [{ include = "freesif" },]
+include = [
+    "LICENSE",
+    "CHANGES.md"
+]
+keywords = ['sesam', 'structural', 'hydrodynamic']
+classifiers=[
+    'Development Status :: 4 - Beta',
+    'Programming Language :: Python :: 3.9',
+]
+
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+numpy = "^1.26.0"
+tables = "^3.8.0"
+
+
+[tool.poetry.urls]
+issues = "https://github.com/agrav/freesif/issues"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
