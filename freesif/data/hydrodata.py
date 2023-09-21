@@ -435,7 +435,7 @@ class HydroData(SifData):
         _npanels = self._n_pressure_panels(bodyid=bodyid)
         _nsymm = self._n_symmetry_parts(bodyid=bodyid)
 
-        if _npanels is not 0:
+        if _npanels != 0:
 
             panels = self._get_results('w1panpre', bodyid, 'ipan')
             symms = self._get_results('w1panpre', bodyid, 'isymm1')
@@ -472,7 +472,7 @@ class HydroData(SifData):
         _npanels = self._n_pressure_panels(bodyid=bodyid)
         _nsymm = self._n_symmetry_parts(bodyid=bodyid)
 
-        if _npanels is not 0:
+        if _npanels != 0:
             pressures = self._get_results('w1panpre', bodyid, 'p')
             pressures.shape = (self._ndirs, self._nfreqs,  _nsymm, _npanels)
             return np.moveaxis(pressures, [2, 3], [1, 0])
