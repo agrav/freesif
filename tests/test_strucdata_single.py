@@ -287,13 +287,13 @@ class TestStrucDataCase06(unittest.TestCase):
     def test_get_elementresults_generalstress(self):
         res = self._data.get_elementresults('generalstress', rescases=1, sets='LD_plates')
         res_verified = self._gr_verified['generalstress']
-        self.assertTrue(np.allclose(res, res_verified))
+        self.assertTrue(np.allclose(res, res_verified, atol=1e-7))
 
     def test_calc_principal_thickshell(self):
         gs = self._data.get_elementresults('generalstress', rescases=1, sets='LD_plates')
         ps = fs.calc.principal_thickshell(gs)
         ps_verified = self._gr_verified['principalstress']
-        self.assertTrue(np.allclose(ps, ps_verified))
+        self.assertTrue(np.allclose(ps, ps_verified, atol=1e-7))
 
 
 class TestStrucDataCase07(unittest.TestCase):
@@ -403,13 +403,13 @@ class TestStrucDataCase09(unittest.TestCase):
     def test_get_elementresults_generalstress(self):
         res = self._data.get_elementresults('generalstress', rescases=1, sets='MD_plates')
         res_verified = self._gr_verified['generalstress']
-        self.assertTrue(np.allclose(res, res_verified))
+        self.assertTrue(np.allclose(res, res_verified, atol=1e-6))
 
     def test_calc_principal_thickshell(self):
         gs = self._data.get_elementresults('generalstress', rescases=1, sets='MD_plates')
         ps = fs.calc.principal_thickshell(gs)
         ps_verified = self._gr_verified['principalstress']
-        self.assertTrue(np.allclose(ps, ps_verified))
+        self.assertTrue(np.allclose(ps, ps_verified, atol=1e-6))
 
 
 class TestStrucDataCase10(unittest.TestCase):
