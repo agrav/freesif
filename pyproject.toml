@@ -29,7 +29,7 @@ h5py = "^3.9.0"
 issues = "https://github.com/agrav/freesif/issues"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
+pytest = ">=7.4.2,<9.0.0"
 pytest-cov = "^4.1.0"
 
 [build-system]
